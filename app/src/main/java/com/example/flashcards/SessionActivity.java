@@ -18,7 +18,7 @@ public class SessionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session);
-        List<Vocable> vocabulary = new ArrayList<Vocable>();
+        Vocabulary vocabulary = new Vocabulary(getIntent().getExtras().getString("REVERSE").equals("true"));
         vocabulary.add(new Vocable("nad/powyżej", "above"));
         vocabulary.add(new Vocable("za granicą", "abroad"));
         vocabulary.add(new Vocable("nieobecny", "absent"));
@@ -48,6 +48,7 @@ public class SessionActivity extends AppCompatActivity {
                 Intent intent = new Intent(SessionActivity.this, ScoreActivity.class);
                 intent.putExtra("SCORE", Integer.toString(score));
                 intent.putExtra("SIZE", Integer.toString(vocabulary.size()));
+                intent.putExtra("REVERSE", getIntent().getExtras().getString("REVERSE"));
                 startActivity(intent);
             } else {
                 counter--;
@@ -62,6 +63,7 @@ public class SessionActivity extends AppCompatActivity {
                 Intent intent = new Intent(SessionActivity.this, ScoreActivity.class);
                 intent.putExtra("SCORE", Integer.toString(score));
                 intent.putExtra("SIZE", Integer.toString(vocabulary.size()));
+                intent.putExtra("REVERSE", getIntent().getExtras().getString("REVERSE"));
                 startActivity(intent);
             } else {
                 counter--;

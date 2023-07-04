@@ -13,8 +13,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button startBtn = (Button) findViewById(R.id.startBtn);
-        startBtn.setOnClickListener(view->{
+        startBtn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, SessionActivity.class);
+            intent.putExtra("REVERSE", "false");
+            startActivity(intent);
+        });
+        Button reverseStartBtn = (Button) findViewById(R.id.reverseStartBtn);
+        reverseStartBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SessionActivity.class);
+            intent.putExtra("REVERSE", "true");
             startActivity(intent);
         });
     }

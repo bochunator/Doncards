@@ -16,6 +16,7 @@ public class ScoreActivity extends AppCompatActivity {
         Button playAgainBtn = findViewById(R.id.playAgainBtn);
         playAgainBtn.setOnClickListener(view -> {
             Intent intent = new Intent(ScoreActivity.this, SessionActivity.class);
+            intent.putExtra("REVERSE", getIntent().getExtras().getString("REVERSE"));
             startActivity(intent);
         });
         Button homeBtn = findViewById(R.id.homeBtn);
