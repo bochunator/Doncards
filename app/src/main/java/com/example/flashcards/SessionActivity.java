@@ -11,26 +11,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SessionActivity extends AppCompatActivity {
-    int counter;
-    boolean foreignIsShow = false;
-    int score;
+    private int counter;
+    private boolean foreignIsShow = false;
+    private int score;
+    private TextView vocableTv;
+    private List<Vocable> vocabulary;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session);
-        Vocabulary vocabulary = new Vocabulary(getIntent().getExtras().getString("REVERSE").equals("true"));
-        vocabulary.add(new Vocable("nad/powyżej", "above"));
-        vocabulary.add(new Vocable("za granicą", "abroad"));
-        vocabulary.add(new Vocable("nieobecny", "absent"));
-        vocabulary.add(new Vocable("wypadek", "accident"));
-        vocabulary.add(new Vocable("żołędź", "acorn"));
-        vocabulary.add(new Vocable("ogłoszenie", "ad"));
-        vocabulary.add(new Vocable("dodawać", "add"));
-        vocabulary.add(new Vocable("adres", "address"));
-        vocabulary.add(new Vocable("podziwiać", "admire"));
-        vocabulary.add(new Vocable("dorosły", "adult"));
+        Button exitBtn = findViewById(R.id.exitBtn);
+        exitBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(SessionActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
+        boolean isReversed = getIntent().getExtras().getString("REVERSE").equals("true");
+        DataBaseHelper dataBaseHelper;
+        dataBaseHelper = new DataBaseHelper(SessionActivity.this);
+        vocabulary = dataBaseHelper.getEveryone(isReversed);
+        if(vocabulary.isEmpty()) {
+            return;
+        }
         counter = vocabulary.size() - 1;
-        TextView vocableTv = findViewById(R.id.vocableTv);
+        vocableTv = findViewById(R.id.vocableTv);
         vocableTv.setText(vocabulary.get(counter).getNativeWord());
         Button showBtn = findViewById(R.id.showBtn);
         showBtn.setOnClickListener(view -> {
@@ -43,37 +46,25 @@ public class SessionActivity extends AppCompatActivity {
         });
         Button noBtn = findViewById(R.id.noBtn);
         noBtn.setOnClickListener(view -> {
-            foreignIsShow = false;
-            if(0 == counter) {
-                Intent intent = new Intent(SessionActivity.this, ScoreActivity.class);
-                intent.putExtra("SCORE", Integer.toString(score));
-                intent.putExtra("SIZE", Integer.toString(vocabulary.size()));
-                intent.putExtra("REVERSE", getIntent().getExtras().getString("REVERSE"));
-                startActivity(intent);
-            } else {
-                counter--;
-                vocableTv.setText(vocabulary.get(counter).getNativeWord());
-            }
+            pickNextVocable();
         });
         Button yesBtn = findViewById(R.id.yesBtn);
         yesBtn.setOnClickListener(view -> {
-            foreignIsShow = false;
             score++;
-            if(0 == counter) {
-                Intent intent = new Intent(SessionActivity.this, ScoreActivity.class);
-                intent.putExtra("SCORE", Integer.toString(score));
-                intent.putExtra("SIZE", Integer.toString(vocabulary.size()));
-                intent.putExtra("REVERSE", getIntent().getExtras().getString("REVERSE"));
-                startActivity(intent);
-            } else {
-                counter--;
-                vocableTv.setText(vocabulary.get(counter).getNativeWord());
-            }
+            pickNextVocable();
         });
-        Button exitBtn = findViewById(R.id.exitBtn);
-        exitBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(SessionActivity.this, MainActivity.class);
+    }
+    private void pickNextVocable() {
+        foreignIsShow = false;
+        if(0 == counter) {
+            Intent intent = new Intent(SessionActivity.this, ScoreActivity.class);
+            intent.putExtra("SCORE", Integer.toString(score));
+            intent.putExtra("SIZE", Integer.toString(vocabulary.size()));
+            intent.putExtra("REVERSE", getIntent().getExtras().getString("REVERSE"));
             startActivity(intent);
-        });
+        } else {
+            counter--;
+            vocableTv.setText(vocabulary.get(counter).getNativeWord());
+        }
     }
 }
