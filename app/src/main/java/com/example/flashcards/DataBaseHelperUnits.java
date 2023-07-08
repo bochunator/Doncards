@@ -48,4 +48,11 @@ public class DataBaseHelperUnits extends DataBaseHelper {
         sqLiteDatabase.close();
         return returnList;
     }
+
+    public boolean deleteOne(int unitId) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + UNITS_TABLE + " WHERE " + UNITS_COLUMN_ID + " = " + unitId;
+        Cursor cursor = sqLiteDatabase.rawQuery(queryString, null);
+        return cursor.moveToFirst();
+    }
 }

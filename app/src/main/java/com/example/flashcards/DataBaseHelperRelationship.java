@@ -87,4 +87,12 @@ public class DataBaseHelperRelationship extends DataBaseHelper {
         sqLiteDatabase.close();
         return returnList;
     }
+
+    public boolean deleteOne(int unitId, Vocable vocable) {
+        SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
+        String queryString = "DELETE FROM " + RELATIONSHIP_TABLE + " WHERE " + RELATIONSHIP_COLUMN_UNITS_ID + " = " + unitId + " AND " +
+                RELATIONSHIP_COLUMN_VOCABULARY_ID + " = " + vocable.getId();
+        Cursor cursor = sqLiteDatabase.rawQuery(queryString, null);
+        return cursor.moveToFirst();
+    }
 }
