@@ -11,17 +11,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Flash Cards"
-        android:textSize="30sp"
+        android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/startBtn"
+        android:id="@+id/dailyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
+        android:text="Daily"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,18 +31,18 @@
         android:id="@+id/answerWithBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Answer with: polish"
+        android:text="Answer with: foreign"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn" />
 
     <Button
-        android:id="@+id/addNewWordBtn"
+        android:id="@+id/studySetsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add new word"
-        app:layout_constraintBottom_toTopOf="@+id/startBtn"
+        android:text="Study sets"
+        app:layout_constraintBottom_toTopOf="@+id/dailyBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"

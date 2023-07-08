@@ -20,15 +20,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences sharedPreferences;
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        Button startBtn = (Button) findViewById(R.id.startBtn);
-        startBtn.setOnClickListener(view -> {
+        Button dailyBtn = findViewById(R.id.dailyBtn);
+        dailyBtn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, SessionActivity.class);
-            intent.putExtra("REVERSE", "false");
             startActivity(intent);
         });
-        Button answerWithBtn = (Button) findViewById(R.id.answerWithBtn);
+        Button answerWithBtn = findViewById(R.id.answerWithBtn);
         String answer = "Answer with: ";
-        answerWithBtn.setText(sharedPreferences.getString(answer + ANSWER_WITH, answer + ANSWER_WITH_FOREIGN));
+        answerWithBtn.setText(answer + sharedPreferences.getString(ANSWER_WITH, ANSWER_WITH_FOREIGN));
         answerWithBtn.setOnClickListener(view -> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             if(sharedPreferences.getString(ANSWER_WITH, ANSWER_WITH_FOREIGN).equals(ANSWER_WITH_FOREIGN)) {
@@ -40,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
             }
             editor.apply();
         });
-        Button addNewWordBtn = (Button) findViewById(R.id.addNewWordBtn);
-        addNewWordBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, NewWordActivity.class);
+        Button studySetsBtn = findViewById(R.id.studySetsBtn);
+        studySetsBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, UnitsActivity.class);
             startActivity(intent);
         });
     }
