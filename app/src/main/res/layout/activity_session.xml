@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SessionActivity">
+    tools:context=".SessionActivity"
+    android:id="@+id/sessionCL">
 
     <TextView
         android:id="@+id/vocableTv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
         android:text="Vocabulary is empty"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,53 +22,38 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/showBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show"
-        app:layout_constraintBottom_toTopOf="@+id/noBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vocableTv" />
-
-    <Button
-        android:id="@+id/yesBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Yes"
-        app:layout_constraintBottom_toBottomOf="@+id/noBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/noBtn"
-        app:layout_constraintTop_toTopOf="@+id/noBtn" />
-
-    <Button
         android:id="@+id/exitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Exit"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/noBtn"
+    <ImageView
+        android:id="@+id/yesIv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No"
+        android:scaleX="4"
+        android:scaleY="4"
+        app:layout_constraintBottom_toBottomOf="@+id/noIv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/noIv"
+        app:layout_constraintTop_toTopOf="@+id/noIv"
+        app:srcCompat="@drawable/ic_check" />
+
+    <ImageView
+        android:id="@+id/noIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:scaleX="3"
+        android:scaleY="3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/yesBtn"
+        app:layout_constraintEnd_toStartOf="@+id/yesIv"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showBtn" />
+        app:srcCompat="@drawable/ic_close" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do you know this word?"
-        app:layout_constraintBottom_toTopOf="@+id/noBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

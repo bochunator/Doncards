@@ -7,11 +7,12 @@
     tools:context=".UnitsActivity">
 
     <Button
-        android:id="@+id/addOneUnitBtn"
+        android:id="@+id/addNewUnitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="Add one"
+        android:text="Add"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/backUnitsBtn"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,17 +23,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        app:layout_constraintBottom_toBottomOf="@+id/addOneUnitBtn"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addNewUnitBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addOneUnitBtn"
-        app:layout_constraintTop_toTopOf="@+id/addOneUnitBtn" />
+        app:layout_constraintStart_toEndOf="@+id/addNewUnitBtn"
+        app:layout_constraintTop_toTopOf="@+id/addNewUnitBtn" />
 
     <ListView
         android:id="@+id/unitsLv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/addOneUnitBtn"
+        app:layout_constraintBottom_toTopOf="@+id/addNewUnitBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

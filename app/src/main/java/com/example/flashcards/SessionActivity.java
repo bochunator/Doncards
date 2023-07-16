@@ -5,13 +5,19 @@ import static com.example.flashcards.MainActivity.ANSWER_WITH_FOREIGN;
 import static com.example.flashcards.MainActivity.SHARED_PREFERENCES;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +28,8 @@ public class SessionActivity extends AppCompatActivity {
     private int score;
     private TextView vocableTv;
     private List<Vocable> vocabulary;
+    private float previousX;
+    DisplayMetrics displayMetrics;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,24 +59,22 @@ public class SessionActivity extends AppCompatActivity {
         counter = vocabulary.size() - 1;
         vocableTv = findViewById(R.id.vocableTv);
         vocableTv.setText(vocabulary.get(counter).getNativeWord());
-        Button showBtn = findViewById(R.id.showBtn);
-        showBtn.setOnClickListener(view -> {
-            if(foreignIsShow) {
-                vocableTv.setText(vocabulary.get(counter).getNativeWord());
-            } else {
-                vocableTv.setText(vocabulary.get(counter).getForeignWord());
-            }
-            foreignIsShow = !foreignIsShow;
+        /*
+        ConstraintLayout sessionCL = findViewById(R.id.sessionCL);
+        sessionCL.setOnClickListener(view -> {
+
         });
-        Button noBtn = findViewById(R.id.noBtn);
-        noBtn.setOnClickListener(view -> {
+         */
+        ImageView noIv = findViewById(R.id.noIv);
+        noIv.setOnClickListener(view -> {
             pickNextVocable();
         });
-        Button yesBtn = findViewById(R.id.yesBtn);
-        yesBtn.setOnClickListener(view -> {
+        ImageView yesIv = findViewById(R.id.yesIv);
+        yesIv.setOnClickListener(view -> {
             score++;
             pickNextVocable();
         });
+        displayMetrics = new DisplayMetrics();
     }
     private void pickNextVocable() {
         foreignIsShow = false;
@@ -76,10 +82,41 @@ public class SessionActivity extends AppCompatActivity {
             Intent intent = new Intent(SessionActivity.this, ScoreActivity.class);
             intent.putExtra("SCORE", Integer.toString(score));
             intent.putExtra("SIZE", Integer.toString(vocabulary.size()));
+            try {
+                intent.putExtra("UNIT_ID", getIntent().getExtras().getString("UNIT_ID"));
+            } catch (Exception e) {
+                Log.d("TAG", "pickNextVocable: You are in Daily Mode");
+            }
             startActivity(intent);
         } else {
             counter--;
             vocableTv.setText(vocabulary.get(counter).getNativeWord());
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN: {
+                previousX = x;
+            } break;
+            case  MotionEvent.ACTION_UP: {
+                if(previousX - x > displayMetrics.widthPixels / 10f) {
+                    pickNextVocable();
+                } else if(x - previousX > displayMetrics.widthPixels / 10f) {
+                    score++;
+                    pickNextVocable();
+                } else {
+                    if(foreignIsShow) {
+                        vocableTv.setText(vocabulary.get(counter).getNativeWord());
+                    } else {
+                        vocableTv.setText(vocabulary.get(counter).getForeignWord());
+                    }
+                    foreignIsShow = !foreignIsShow;
+                }
+            } return true;
+        }
+        return super.onTouchEvent(event);
     }
 }

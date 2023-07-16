@@ -8,37 +8,40 @@
     tools:context=".VocabularyActivity">
 
     <Button
-        android:id="@+id/addOneVocableBtn"
+        android:id="@+id/addNewVocableBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="Add one"
+        android:text="Add"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/startLearningBtn"
+        app:layout_constraintEnd_toStartOf="@+id/startBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/startLearningBtn"
+        android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start learning"
-        app:layout_constraintBottom_toBottomOf="@+id/addOneVocableBtn"
+        android:text="Start"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addNewVocableBtn"
         app:layout_constraintEnd_toStartOf="@+id/backVocabularyBtn"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/addOneVocableBtn"
-        app:layout_constraintTop_toTopOf="@+id/addOneVocableBtn" />
+        app:layout_constraintStart_toEndOf="@+id/addNewVocableBtn"
+        app:layout_constraintTop_toTopOf="@+id/addNewVocableBtn" />
 
     <Button
         android:id="@+id/backVocabularyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        app:layout_constraintBottom_toBottomOf="@+id/startLearningBtn"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/startBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/startLearningBtn"
-        app:layout_constraintTop_toTopOf="@+id/startLearningBtn" />
+        app:layout_constraintStart_toEndOf="@+id/startBtn"
+        app:layout_constraintTop_toTopOf="@+id/startBtn" />
 
     <ListView
         android:id="@+id/vocabularyLv"
@@ -56,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="Remove all"
-        app:layout_constraintBottom_toTopOf="@+id/addOneVocableBtn"
-        app:layout_constraintStart_toStartOf="@+id/addOneVocableBtn" />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/addNewVocableBtn"
+        app:layout_constraintStart_toStartOf="@+id/addNewVocableBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

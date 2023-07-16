@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -26,8 +23,8 @@ public class VocabularyActivity extends AppCompatActivity {
             Intent intent = new Intent(VocabularyActivity.this, UnitsActivity.class);
             startActivity(intent);
         });
-        Button addOneVocableBtn = findViewById(R.id.addOneVocableBtn);
-        addOneVocableBtn.setOnClickListener(view -> {
+        Button addNewVocableBtn = findViewById(R.id.addNewVocableBtn);
+        addNewVocableBtn.setOnClickListener(view -> {
             Intent intent = new Intent(VocabularyActivity.this, NewVocableActivity.class);
             intent.putExtra("UNIT_ID", unitId);
             startActivity(intent);
@@ -48,8 +45,8 @@ public class VocabularyActivity extends AppCompatActivity {
                     })
                     .show();
         });
-        Button startLearningBtn = findViewById(R.id.startLearningBtn);
-        startLearningBtn.setOnClickListener(view -> {
+        Button startBtn = findViewById(R.id.startBtn);
+        startBtn.setOnClickListener(view -> {
             Intent intent = new Intent(VocabularyActivity.this, SessionActivity.class);
             intent.putExtra("UNIT_ID", getIntent().getExtras().getString("UNIT_ID"));
             startActivity(intent);
