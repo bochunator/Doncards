@@ -7,6 +7,9 @@ import pl.bochunator.doncards.model.ApplicationUser;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<ApplicationUser, Long> {
+public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, Long> {
+
+    Optional<ApplicationUser> findByEmail(String email);
+
     Optional<ApplicationUser> findByUsername(String username);
 }

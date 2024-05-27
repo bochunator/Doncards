@@ -5,19 +5,24 @@ import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home.tsx'
 import Contact from './pages/Contact.tsx'
+import Registration from './pages/Registration/Registration.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/Doncards/",
-    element: <App/>,
+    element: <App />,
     children: [
       {
         path: "/Doncards/",
-        element: <Home/>
+        element: <Home />
       },
       {
         path: "/Doncards/contact",
-        element: <Contact/>
+        element: <Contact />
+      },
+      {
+        path: "/Doncards/auth/register",
+        element: <Registration />
       }
     ]
   }
@@ -25,7 +30,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
 

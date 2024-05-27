@@ -23,6 +23,9 @@ public class ApplicationUser implements UserDetails {
     private Long userId;
 
     @Column(unique = true)
+    private String email;
+
+    @Column(unique = true)
     private String username;
 
     private String password;
