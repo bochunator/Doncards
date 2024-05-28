@@ -61,10 +61,15 @@ public class AuthenticationService {
 
     public LoginResponseDTO loginUser(LoginDTO loginDTO) {
         try {
+            System.out.println(loginDTO.getUsername());
+            System.out.println(loginDTO.getPassword());
+            System.out.println("RAZ");
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
             );
+            System.out.println("DWA");
             String token = tokenService.generateJwt(auth);
+            System.out.println("TRZY");
             return new LoginResponseDTO(applicationUserRepository.findByUsername(loginDTO.getUsername()).orElseThrow(), token);
         } catch (AuthenticationException e) {
             return new LoginResponseDTO(null, "");

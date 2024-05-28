@@ -15,7 +15,7 @@ const defaultCustomAlert = {
     variant: "variant",
     heading: "heading",
     message: "message",
-    onClose: () => {}
+    onClose: () => { }
 }
 
 const Registration: React.FC = () => {
@@ -37,7 +37,7 @@ const Registration: React.FC = () => {
         // setFormData(defaultFormData)
     }
 
-    const updateAlert = (variant: string, heading: string, message:string) => {
+    const updateAlert = (variant: string, heading: string, message: string) => {
         setCustomAlert({
             ...customAlert,
             variant: variant,
@@ -48,7 +48,7 @@ const Registration: React.FC = () => {
 
     const registerUser = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_DONCARDS_BACKEND_URL}/auth/register`, { 
+            const response = await fetch(`${import.meta.env.VITE_DONCARDS_BACKEND_URL}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -71,24 +71,24 @@ const Registration: React.FC = () => {
 
     return (
         <>
-        <div className="Register">
-            <Form onSubmit={(e) => onSubmit(e)}>
-                <Form.Group controlId="email">
-                    <Form.Label>E-mail</Form.Label>
-                    <Form.Control autoFocus name="email" value={email} onChange={onChange}/>
-                </Form.Group>
-                <Form.Group controlId="username">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control name="username" value={username} onChange={onChange}/>
-                </Form.Group>
-                <Form.Group controlId="password">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name="password" value={password} onChange={onChange}/>
-                </Form.Group>
-                <Button size="lg" type="submit">Register</Button>
-            </Form>
-        </div>
-        <CustomAlert { ...customAlert }/>
+            <div className="register">
+                <Form onSubmit={(e) => onSubmit(e)}>
+                    <Form.Group controlId="email">
+                        <Form.Label>E-mail</Form.Label>
+                        <Form.Control autoFocus name="email" value={email} onChange={onChange} />
+                    </Form.Group>
+                    <Form.Group controlId="username">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control name="username" value={username} onChange={onChange} />
+                    </Form.Group>
+                    <Form.Group controlId="password">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" name="password" value={password} onChange={onChange} />
+                    </Form.Group>
+                    <Button size="lg" type="submit">Register</Button>
+                </Form>
+            </div>
+            <CustomAlert {...customAlert} />
         </>
     )
 }

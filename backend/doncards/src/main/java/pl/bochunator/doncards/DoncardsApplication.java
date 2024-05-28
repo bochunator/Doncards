@@ -43,7 +43,7 @@ public class DoncardsApplication {
             ApplicationUser admin = new ApplicationUser();
             admin.setUserId(1L);
             admin.setUsername(adminUsername);
-            admin.setUsername(passwordEncoder.encode(adminPassword));
+            admin.setPassword(passwordEncoder.encode(adminPassword));
             admin.setAuthorities(authorities);
             applicationUserRepository.save(admin);
         };

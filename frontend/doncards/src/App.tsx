@@ -10,6 +10,8 @@ function App() {
       <Link to="/Doncards/contact">Contact</Link>
       {" | "}
       <Link to="/Doncards/auth/register">Registration</Link>
+      {" | "}
+      <Link to="/Doncards/auth/login">Login</Link>
     </nav>
       <h1>Doncards</h1>
       <Outlet />
