@@ -1,0 +1,32 @@
+.name {
+    margin: 5px;
+    width: 80%;
+}
+
+.description {
+    height: 100px;
+    margin: 5px;
+    width: 80%;
+}
+
+.term {
+    margin: 5px;
+    width: 80%;
+}
+
+.translation {
+    margin: 5px;
+    width: 80%;
+}
+
+.card-white-icon {
+    color: white;
+    margin: 0 0.25rem ;
+    font-size: 40px;
+}
+
+.card-red-icon {
+    color: red;
+    margin: 0 0.25rem ;
+    font-size: 40px;
+}

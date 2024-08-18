@@ -16,8 +16,17 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 
     private final ApplicationUserRepository applicationUserRepository;
 
+    /*
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return applicationUserRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user is not valid"));
+    }
+     */
+
+    @Override
+    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+        return applicationUserRepository.findByUsername(usernameOrEmail)
+                .or(() -> applicationUserRepository.findByEmail(usernameOrEmail))
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username or email: " + usernameOrEmail));
     }
 }

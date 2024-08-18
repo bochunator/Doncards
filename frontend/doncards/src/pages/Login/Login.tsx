@@ -1,64 +1,84 @@
-import { useState } from 'react';
-import axios from 'axios'
-import useSignIn from 'react-auth-kit/hooks/useSignIn'
+import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
 import './Login.css'
+import { Link } from 'react-router-dom'
+import { LoginData, defaultLoginData } from '../../types/authTypes'
+import { EMAIL_REGEX, PASSWORD_REGEX, USER_REGEX } from '../../utils/validationPatterns'
+import { loginUser } from '../../redux/Slices/AuthSlice'
+import { AppDispatch } from '../../redux/Store'
+import { useDispatch } from 'react-redux'
 
-const defaultFormData = {
-    username: "",
-    password: "",
-}
 
 const Login: React.FC = () => {
-    const [formData, setFormData] = useState(defaultFormData)
-    const { username, password } = formData
+    const [loginData, setLoginData] = useState<LoginData>(defaultLoginData)
+    const { loginPayload } = loginData
+    const { identifier, password } = loginPayload
+    const dispatch: AppDispatch = useDispatch()
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData(prevState => ({
+        const { name, value } = e.target
+        setLoginData(prevState => ({
             ...prevState,
-            [e.target.id]: e.target.value,
+            loginPayload: {
+                ...prevState.loginPayload,
+                [name]: value
+            }
         }))
     }
-    
-    const signIn = useSignIn()
+
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        axios.post(`${import.meta.env.VITE_DONCARDS_BACKEND_URL}/auth/login`, formData) 
-            .then((res)=>{
-                console.log(res.data.user)
-                if(res.status === 200){
-                    console.log('Token:', res.data.jwt)
-                    if(signIn({
-                        auth: {
-                            token: res.data.jwt,
-                            type: 'Bearer'
-                        },
-                        userState: res.data.user//res.data.authUserState
-                    })){ // Only if you are using refreshToken feature
-                        // Redirect or do-something
-                    }else {
-                        //Throw error
-                        console.log("NIE DZIALA LOGOWANIE!")
-                    }
-                }
-            })
+
+        validForm() && dispatch(loginUser(loginPayload))
     }
+
+    const validEmail = () => {
+        return EMAIL_REGEX.test(identifier)
+    }
+
+    const validUsername = () => {
+        return USER_REGEX.test(identifier)
+    }
+
+    const validPassword = () => {
+        return PASSWORD_REGEX.test(password)
+    }
+
+    const validForm = () => {
+        return (validEmail() || validUsername()) && validPassword()
+    }
+
     return (
         <>
-            <div className="login">
+            <section>
                 <Form onSubmit={(e) => onSubmit(e)}>
-                    <Form.Group controlId="username">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control autoFocus name="username" value={username} onChange={onChange} />
+                    <h1>Login</h1>
+                    <Form.Group controlId="identifier">
+                        <Form.Label>Email or Username</Form.Label>
+                        <Form.Control
+                            autoFocus
+                            name="identifier"
+                            value={identifier}
+                            onChange={onChange}
+                        />
                     </Form.Group>
                     <Form.Group controlId="password">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password" value={password} onChange={onChange} />
+                        <Form.Control
+                            type="password"
+                            name="password"
+                            value={password}
+                            onChange={onChange}
+                        />
                     </Form.Group>
-                    <Button size="lg" type="submit">Register</Button>
+                    <Button type='submit' disabled={!validForm()} size='lg'>Sign In</Button>
                 </Form>
-            </div>
+                <div>
+                    Need an Account?
+                    <div> <Link to="/Doncards/auth/register" style={{ color: 'dodgerblue' }}>Sign Up</Link></div>
+                </div>
+            </section>
         </>
     )
 }

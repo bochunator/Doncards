@@ -2,17 +2,15 @@ package pl.bochunator.doncards.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-@Table(name = "role")
-@RequiredArgsConstructor
+@Table(name = "roles")
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class Role implements GrantedAuthority {
 
     @Id
@@ -20,5 +18,11 @@ public class Role implements GrantedAuthority {
     @Column(name = "role_id")
     private Long roleId;
 
+    @Column(unique = true)
     private String authority;
+
+    public Role(String authority) {
+        this.authority = authority;
+    }
+
 }

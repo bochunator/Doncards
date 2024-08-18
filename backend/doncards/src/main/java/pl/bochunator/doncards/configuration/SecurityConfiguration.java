@@ -25,13 +25,17 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.bochunator.doncards.utils.RSAKeyProperties;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
+    private final DoncardsApplicationConfiguration doncardsApplicationConfiguration;
     private final RSAKeyProperties keys;
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -84,4 +88,15 @@ public class SecurityConfiguration {
         jwtConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
         return jwtConverter;
     }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins(doncardsApplicationConfiguration.getHost());
+            }
+        };
+    }
+
 }

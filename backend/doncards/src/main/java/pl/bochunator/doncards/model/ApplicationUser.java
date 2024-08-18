@@ -1,20 +1,21 @@
 package pl.bochunator.doncards.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "application_user")
-@RequiredArgsConstructor
+@Data
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class ApplicationUser implements UserDetails {
 
     @Id
@@ -28,11 +29,12 @@ public class ApplicationUser implements UserDetails {
     @Column(unique = true)
     private String username;
 
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_role_junction",
+            name = "application_user_role_junction",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
