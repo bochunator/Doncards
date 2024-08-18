@@ -1,9 +1,19 @@
 # Flash Cards
 
-My main purpose was to create application using database, in this case I used local SQLite. Database is empty so you need to fill it with your own vocabulary. Daily mode fetches vocabulary and shows up to 30 of them.
+## Download
 
-You can download release file on your phone without android studio and install application. Path to file is: app/release/app-release.apk
-## phone screenshots:
+Offline version, no internet connection required:
+
+https://github.com/bochunator/Doncards/releases/download/1.0/app-release.apk
+
+## Website
+
+Still in developing (In the future, it will enable integration with the mobile app, allowing for
+dynamic vocabulary downloads from a database):
+
+https://bochunator.github.io/Doncards/
+
+## Screenshots
 ![alt text](https://i.ibb.co/0qdVhtT/Screenshot-20230712-220804.png)
 ![alt text](https://i.ibb.co/92tJ2xM/Screenshot-20230712-221048.png)
 ![alt text](https://i.ibb.co/n7fYZ1L/Screenshot-20230712-212620.png)
@@ -19,7 +29,7 @@ You can download release file on your phone without android studio and install a
 ![alt text](https://i.ibb.co/svTt5pn/Screenshot-20230712-215012.png)
 ![alt text](https://i.ibb.co/sC9vhkb/Screenshot-20230712-215027.png)
 
-## dark phone screenshots:
+### Dark theme
 ![alt text](https://i.ibb.co/dtGDcc3/Screenshot-20230712-212914.png)
 ![alt text](https://i.ibb.co/2nXx7Yg/Screenshot-20230712-212931.png)
 ![alt text](https://i.ibb.co/rtxvw00/Screenshot-20230712-212939.png)
@@ -34,3 +44,8 @@ You can download release file on your phone without android studio and install a
 ![alt text](https://i.ibb.co/RPbjHRC/Screenshot-20230712-214038.png)
 ![alt text](https://i.ibb.co/1JDnmsq/Screenshot-20230712-215121.png)
 ![alt text](https://i.ibb.co/G5bzpz8/Screenshot-20230712-215134.png)
+
+## About project
+
+My main purpose was to create application using database, in this case I used local SQLite. Database is empty so you need to fill it with your own vocabulary. Daily mode fetches vocabulary and shows up to 30 of them.
+
