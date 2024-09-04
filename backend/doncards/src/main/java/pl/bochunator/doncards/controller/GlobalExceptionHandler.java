@@ -6,6 +6,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import pl.bochunator.doncards.exception.*;
+import pl.bochunator.doncards.exception.username.UsernameAlreadyTakenException;
+import pl.bochunator.doncards.exception.username.UsernameIsNotValidException;
+import pl.bochunator.doncards.exception.username.UsernameNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -48,7 +51,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({
-            EmailNotFoundException.class
+            EmailNotFoundException.class,
+            UsernameNotFoundException.class,
+            UserIdNotFoundException.class,
+            DeckNotFoundException.class
     })
     public ResponseEntity<String> handleNotFoundException(RuntimeException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);

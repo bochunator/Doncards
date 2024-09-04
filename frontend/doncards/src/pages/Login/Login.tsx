@@ -29,7 +29,6 @@ const Login: React.FC = () => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
         validForm() && dispatch(loginUser(loginPayload))
     }
 

@@ -1,0 +1,77 @@
+
+
+.learning-session-section {
+    position: relative;
+    height: 300px;
+    padding: 0;
+}
+
+.learning-session-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 40px;
+}
+
+.learning-session-icons {
+    transform: translateY(100%);
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+
+.learning-card-red-icon {
+    color: red;
+    font-size: 80px;
+    width: 100%;
+    padding: 50px;
+    cursor: pointer;
+}
+
+.learning-card-red-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.learning-card-green-icon {
+    color: lawngreen;
+    font-size: 80px;
+    width: 100%;
+    padding: 50px;
+    cursor: pointer;
+}
+
+.learning-session-result {
+    color: rgba(30, 143, 255, 0.601);
+    font-size: 80px;
+    padding: 50px;
+    cursor: pointer;
+}
+
+.learning-session-result:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.learning-card-green-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.learning-session-number-of-cards {
+    display: flex;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.learning-session-result-h3 {
+    color: rgba(30, 143, 255, 0.601);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 40px;
+}

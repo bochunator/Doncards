@@ -2,7 +2,7 @@ package pl.bochunator.doncards.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.bochunator.doncards.dto.common.card.CardDTO;
+import pl.bochunator.doncards.dto.card.CardDTO;
 import pl.bochunator.doncards.model.Card;
 import pl.bochunator.doncards.repository.CardRepository;
 

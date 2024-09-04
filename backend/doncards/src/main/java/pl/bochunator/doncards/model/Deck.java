@@ -1,10 +1,8 @@
 package pl.bochunator.doncards.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.List;
 @Table(
         name = "deck",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"author", "name"})
+                @UniqueConstraint(columnNames = {"author_id", "name"})
         }
 )
 @Data
@@ -27,8 +25,9 @@ public class Deck {
     @Column(name = "deck_id")
     private Long deckId;
 
-    @ManyToOne
-    @JoinColumn(name = "author", nullable = false)
+    // @JsonIgnoreProperties("decks")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
     private ApplicationUser author;
 
     @Column(name = "name", nullable = false)
@@ -51,10 +50,26 @@ public class Deck {
     )
     private List<Card> cards;
 
+    public Deck(String name, List<Card> cards) {
+        this.name = name;
+        this.cards = cards;
+    }
+
     public Deck(ApplicationUser author, String name, List<Card> cards) {
         this.author = author;
         this.name = name;
         this.cards = cards;
     }
 
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "deckId=" + deckId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", createdAt=" + createdAt +
+                ", version=" + version +
+                ", cards=" + cards +
+                '}';
+    }
 }

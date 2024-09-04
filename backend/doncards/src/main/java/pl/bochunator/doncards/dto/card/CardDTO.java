@@ -1,4 +1,4 @@
-package pl.bochunator.doncards.dto.common.card;
+package pl.bochunator.doncards.dto.card;
 
 import lombok.Data;
 
@@ -6,7 +6,5 @@ import lombok.Data;
 public class CardDTO {
 
     private String term;
-
     private String translation;
-
 }

@@ -20,9 +20,6 @@ const Registration: React.FC = () => {
     const dispatch: AppDispatch = useDispatch()
     const { message } = useSelector((state: RootState) => state.auth.customAlertState)
     const navigate = useNavigate()
-    // TODO: type alert to different file
-    // TODO: merge customAlert with registrationData
-    // const { error, customAlertState } = useSelector((state: RootState) => state.auth)
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -44,24 +41,15 @@ const Registration: React.FC = () => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch(registerUser(registrationPayload))
+        validForm() && dispatch(registerUser(registrationPayload))
     }
 
     useEffect(() => {
-        console.log('UZYTO USE EFFECT')
         if (message !== null) {
-            console.log("nie powinno przekierowywać")
-            console.log("message", message)
             navigate("/Doncards/auth/login")
         }
     }, [message])
-/*
-    useEffect(() => {
-        if (customAlertState.message !== null && error === null) {
-            customNavigate('/Doncards/auth/login')
-        }
-    }, [customAlertState])
-*/
+
     const validEmail = () => {
         return EMAIL_REGEX.test(email)
     }
@@ -81,38 +69,6 @@ const Registration: React.FC = () => {
     const validForm = () => {
         return validEmail() && validUsername() && validPassword() && validMatchPassword()
     }
-    /*
-        const registerUser = () => {
-            api
-                .post<reigstrationResponse>(REGISTER_URL, { username, email, password, matchPassword })
-                .pipe(
-                    take(1),
-                    catchError(err => {
-                        if (err.response && err.response.status === 422) {
-                            updateAlert('danger', 'User already exists!', err.response.data.message)
-                        } else {
-                            updateAlert('danger', 'User not registered!', 'Something went wrong.')
-                        }
-                        return of(null);
-                    })
-                )
-                .subscribe((response) => {
-                    if (response) {
-                        updateAlert('success', 'User registered!', response.message)
-                        setFormData(defaultFormData)
-                        setSuccess(true)
-                    }
-                })
-        }
-    const updateAlert = (variant: string, heading: string, message: string) => {
-        setCustomAlert({
-            ...customAlert,
-            variant: variant,
-            heading: heading,
-            message: message
-        })
-    }
-    */
 
     return (
         <>

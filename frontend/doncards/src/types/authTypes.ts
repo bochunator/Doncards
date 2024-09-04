@@ -1,3 +1,5 @@
+import { ApplicationUser } from "./applicationUserTypes"
+
 export interface RegistrationPayload {
     email: string
     username: string
@@ -38,29 +40,6 @@ export const defaultLoginData: LoginData = {
     loginPayload: defaultLoginPayload
 }
 
-export enum ROLES {
-    USER = 'USER',
-    ADMIN = 'ADMIN'
-}
-
-export type RoleType = ROLES
-
-export interface Role {
-    roleId: number
-    authority: RoleType
-}
-
-export interface ApplicationUser {
-    userId: number
-    email: string
-    username: string
-    authorities: Role[]
-    enabled: boolean
-    credentialsNonExpired: boolean
-    accountNonExpired: boolean
-    accountNonLocked: boolean
-}
-
 export enum CUSTOM_ALERTS {
     PRIMARY = 'primary',
     SECONARY = 'secondary',
@@ -93,7 +72,6 @@ export interface AuthSliceState {
     jwt: string | null
     applicationUser: ApplicationUser | null
     redirected: boolean
-    profile: ApplicationUser | null
 }
 
 export const initialAuthState: AuthSliceState = {
@@ -102,6 +80,5 @@ export const initialAuthState: AuthSliceState = {
     customAlertState: defaultCustomAlertState,
     jwt: null,
     applicationUser: null,
-    redirected: false,
-    profile: null
+    redirected: false
 }

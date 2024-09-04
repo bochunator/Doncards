@@ -6,19 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.bochunator.doncards.configuration.DoncardsApplicationConfiguration;
-import pl.bochunator.doncards.model.ApplicationUser;
-import pl.bochunator.doncards.model.Card;
-import pl.bochunator.doncards.model.Deck;
-import pl.bochunator.doncards.model.Role;
-import pl.bochunator.doncards.repository.ApplicationUserRepository;
-import pl.bochunator.doncards.repository.CardRepository;
-import pl.bochunator.doncards.repository.DeckRepository;
-import pl.bochunator.doncards.repository.RoleRepository;
+import pl.bochunator.doncards.model.*;
+import pl.bochunator.doncards.repository.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -236,13 +228,24 @@ public class DataInitializer {
                             )
                     .flatMap(Set::stream)
                     .collect(Collectors.toSet()));
-            Set<Deck> decks = new HashSet<>(Set.of(
+            // Bidirectional knowledge
+            // test.setDecks(new ArrayList<>());
+            // test.addDeck(new Deck("a", new ArrayList<>(aCards)));
+            // test.addDeck(new Deck("animals", new ArrayList<>(aCards)));
+            // test.addDeck(new Deck("b", new ArrayList<>(aCards)));
+            // test.addDeck(new Deck("bathroom", new ArrayList<>(aCards)));
+            // applicationUserRepository.save(admin);
+            // applicationUserRepository.save(test);
+            // deckRepository.saveAll(test.getDecks());
+            HashSet<Deck> deck = new HashSet<>(Set.of(
                     new Deck(test, "a", new ArrayList<>(aCards)),
                     new Deck(test, "animals", new ArrayList<>(animalsCards)),
                     new Deck(test, "b", new ArrayList<>(bCards)),
                     new Deck(test, "bathroom", new ArrayList<>(bathroomCards))
             ));
-            deckRepository.saveAll(decks);
+            deckRepository.saveAll(deck);
+
+            deckRepository.save(new Deck(admin, "Greetings!", new ArrayList<>()));
         };
     }
 

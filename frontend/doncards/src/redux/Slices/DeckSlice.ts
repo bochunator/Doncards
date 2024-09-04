@@ -1,14 +1,15 @@
-import { PayloadAction, createAsyncThunk, createSlice, isPending } from "@reduxjs/toolkit"
-import { Card, CreateDeckPayload, Deck, DeckDTO, initialDeckState } from "../../types/deckTypes"
+import { PayloadAction, createAsyncThunk, createSlice, isPending, isRejected } from "@reduxjs/toolkit"
+import { CreateDeckPayload, DeckDetailsDTO, DeckSummaryDTO, initialDeckState, mapApplicationUserWithDecks } from "../../types/deckTypes"
 import axios, { AxiosError } from "axios"
+import { Card } from "../../types/cardTypes"
 
 const URL = import.meta.env.VITE_DONCARDS_BACKEND_URL
 
 export const createDeck = createAsyncThunk(
-    'user/deck/create',
+    'decks',
     async ({ body, token }: { body: CreateDeckPayload, token: string }, thunkAPI) => {
         try {
-            const response = await axios.post(`${URL}/user/deck/create`, body, {
+            const response = await axios.post(`${URL}/decks`, body, {
                 headers: {
                     'Authorization': `Bearer ${token} `
                 }
@@ -20,11 +21,48 @@ export const createDeck = createAsyncThunk(
     }
 )
 
-export const getDecks = createAsyncThunk(
-    'auth/decks/cards',
+export const fetchDecksForHome = createAsyncThunk(
+    'decks?page',
     async (page: number, thunkAPI) => {
         try {
-            const response = await axios.get(`${URL}/auth/decks/cards?page=${page}`)
+            console.log('URL', URL)
+            const response = await axios.get(`${URL}/decks?page=${page}`)
+            return response.data
+        } catch (e) {
+            return thunkAPI.rejectWithValue((e as AxiosError).response?.data)
+        }
+    }
+)
+
+export const fetchApplicationUserWithDecksByUserId = createAsyncThunk(
+    'users/userId/with-decks',
+    async (userId: number, thunkAPI) => {
+        try {
+            const response = await axios.get(`${URL}/users/${userId}/with-decks`)
+            return response.data
+        } catch (e) {
+            return thunkAPI.rejectWithValue((e as AxiosError).response?.data)
+        }
+    }
+)
+
+export const fetchNextDecksByUserId = createAsyncThunk(
+    'users/userId/decks',
+    async ({ userId, page }: { userId: number, page: number }, thunkAPI) => {
+        try {
+            const response = await axios.get(`${URL}/users/${userId}/decks?page=${page}`)
+            return response.data
+        } catch (e) {
+            return thunkAPI.rejectWithValue((e as AxiosError).response?.data)
+        }
+    }
+)
+
+export const fetchDeckByDeckId = createAsyncThunk(
+    'decks/{deckId}',
+    async (deckId: number, thunkAPI) => {
+        try {
+            const response = await axios.get(`${URL}/decks/${deckId}`)
             return response.data
         } catch (e) {
             return thunkAPI.rejectWithValue((e as AxiosError).response?.data)
@@ -33,18 +71,30 @@ export const getDecks = createAsyncThunk(
 )
 
 export const DeckSlice = createSlice({
-    name: 'authentication',
+    name: 'deck',
     initialState: initialDeckState,
     reducers: {
-        increasePage(state) {
+        increaseHomePage(state) {
             return {
                 ...state,
-                page: state.page + 1
+                homeDecksPage: state.homeDecksPage + 1
+            }
+        },
+        increaseProfilePage(state) {
+            return {
+                ...state,
+                profileDecksPage: state.profileDecksPage + 1
+            }
+        },
+        updateLearningDeck(state, action: PayloadAction<DeckDetailsDTO | DeckSummaryDTO>) {
+            return {
+                ...state,
+                learningDeck: action.payload
             }
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(createDeck.fulfilled, (state, action: PayloadAction<Deck>) => {
+        builder.addCase(createDeck.fulfilled, (state, action) => {
             state.error = null
             state.loading = false
             state.createdDeck = {
@@ -60,16 +110,32 @@ export const DeckSlice = createSlice({
                 })),
             }
         })
-        builder.addCase(getDecks.fulfilled, (state, action: PayloadAction<DeckDTO[]>) => {
+        builder.addCase(fetchDecksForHome.fulfilled, (state, action) => {
             state.error = null
             state.loading = false
-            state.deckDTOs = [...state.deckDTOs, ...action.payload]
+            console.log('action.payload.content', action.payload.content)
+            state.homeDecks = [...state.homeDecks, ...action.payload.content]
         })
-        builder.addCase(createDeck.rejected, (state, action) => {
-            state.error = action.payload as string
+
+        builder.addCase(fetchApplicationUserWithDecksByUserId.fulfilled, (state, action) => {
+            state.error = null
             state.loading = false
+            state.profile = mapApplicationUserWithDecks(action.payload)
+            state.profileDecksPage = 0
         })
-        builder.addCase(getDecks.rejected, (state, action) => {
+        builder.addCase(fetchNextDecksByUserId.fulfilled, (state, action) => {
+            state.error = null
+            state.loading = false
+            if (state.profile)
+                state.profile.decks = [...state.profile.decks, ...action.payload.content]
+        })
+        builder.addCase(fetchDeckByDeckId.fulfilled, (state, action) => {
+            state.error = null
+            state.loading = false
+            state.learningDeck = action.payload
+            console.log('action.payload', action.payload)
+        })
+        builder.addMatcher(isRejected, (state, action) => {
             state.error = action.payload as string
             state.loading = false
         })
@@ -80,8 +146,6 @@ export const DeckSlice = createSlice({
     },
 })
 
-
-
-export const { increasePage } = DeckSlice.actions
+export const { increaseHomePage, increaseProfilePage, updateLearningDeck } = DeckSlice.actions
 
 export default DeckSlice.reducer

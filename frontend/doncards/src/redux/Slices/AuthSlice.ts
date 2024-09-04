@@ -1,6 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice, isPending } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
-import { CUSTOM_ALERTS, CustomAlertState, ApplicationUser, LoginPayload, RegistrationPayload, Role, defaultCustomAlertState, initialAuthState, AuthSliceState } from "../../types/authTypes";
+import { CUSTOM_ALERTS, CustomAlertState, LoginPayload, RegistrationPayload, defaultCustomAlertState, initialAuthState, AuthSliceState } from "../../types/authTypes";
+import { mapApplicationUser } from "../../types/applicationUserTypes";
 
 
 const URL = import.meta.env.VITE_DONCARDS_BACKEND_URL
@@ -45,32 +46,6 @@ export const verifyUserByToken = createAsyncThunk(
     }
 )
 
-export const getUserByUsername = createAsyncThunk(
-    'auth/profile',
-    async (username: string, thunkAPI) => {
-        try {
-            const response = await axios.get(`${URL}/auth/profile/${username}`)
-            return response.data
-        } catch (e) {
-            return thunkAPI.rejectWithValue((e as AxiosError).response?.data)
-        }
-    }
-)
-
-const mapApplicationUser = (user: any): ApplicationUser => ({
-    userId: user.userId,
-    email: user.email,
-    username: user.username,
-    authorities: user.authorities.map((role: Role) => ({
-        roleId: role.roleId,
-        authority: role.authority
-    })),
-    enabled: user.enabled,
-    credentialsNonExpired: user.credentialsNonExpired,
-    accountNonExpired: user.accountNonExpired,
-    accountNonLocked: user.accountNonLocked
-})
-
 const createRejectedHandler = (heading: string | null) => (state: AuthSliceState, action: PayloadAction<any>) => {
     state.error = action.payload
     state.loading = false
@@ -113,10 +88,10 @@ export const AuthSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(registerUser.fulfilled, (state, action) => {
+        builder.addCase(registerUser.fulfilled, (state) => {
             state.error = null
             state.loading = false
-            state.customAlertState = { variant: CUSTOM_ALERTS.SUCCESS, heading: 'Registered', message: action.payload }
+            state.customAlertState = { variant: CUSTOM_ALERTS.SUCCESS, heading: 'Registered', message: 'Now you can log in' }
         })
         builder.addCase(loginUser.fulfilled, (state, action) => {
             state.error = null
@@ -129,11 +104,6 @@ export const AuthSlice = createSlice({
             state.loading = false
             state.applicationUser = mapApplicationUser(action.payload)
         })
-        builder.addCase(getUserByUsername.fulfilled, (state, action) => {
-            state.error = null
-            state.loading = false
-            state.profile = mapApplicationUser(action.payload)
-        })
         builder.addCase(registerUser.rejected, createRejectedHandler('Registration Failed'))
         builder.addCase(loginUser.rejected, createRejectedHandler('Login Failed'))
         builder.addCase(verifyUserByToken.rejected, (state, action) => {
@@ -141,7 +111,6 @@ export const AuthSlice = createSlice({
             state.loading = false
             localStorage.removeItem('jwt')
         })
-        builder.addCase(getUserByUsername.rejected, createRejectedHandler('Doesn\'t found User'))
         builder.addMatcher(isPending, (state) => {
             state.error = null
             state.loading = true

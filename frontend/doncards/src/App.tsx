@@ -3,11 +3,10 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './App.css'
-import { ROLES } from './types/authTypes.ts'
 import RequireAuth from './components/RequireAuth.tsx'
 import ProtectedRoute from './components/ProtectedRoute.tsx'
 import Layout from './pages/Layout/Layout'
-import Home from './pages/Home.tsx'
+import Home from './pages/Home/Home.tsx'
 import Contact from './pages/Contact.tsx'
 import Registration from './pages/Registration/Registration.tsx'
 import Login from './pages/Login/Login.tsx'
@@ -20,6 +19,8 @@ import Logout from './pages/Logout.tsx'
 import Admin from './pages/Admin.tsx'
 import CreateDeck from './pages/CreateDeck/CreateDeck.tsx'
 import Profile from './pages/Profile.tsx'
+import { ROLES } from './types/applicationUserTypes.ts'
+import LearningSession from './pages/LearningSession/LearningSession.tsx'
 
 
 const router = createBrowserRouter([
@@ -64,8 +65,12 @@ const router = createBrowserRouter([
                 element: <RequireAuth allowedRoles={[ROLES.USER]}><Logout /></RequireAuth>
             },
             {
-                path: "/Doncards/auth/profile/:username",
+                path: "/Doncards/profile/:userId",
                 element: <Profile />
+            },
+            {
+                path: "/Doncards/learning/:deckId",
+                element: <LearningSession />
             },
             {
                 path: "*",
@@ -79,10 +84,8 @@ const App: React.FC = () => {
     const dispatch: AppDispatch = useDispatch()
     const { jwt } = useSelector((state: RootState) => state.auth)
     useEffect(() => {
-        console.log("co jest sie")
         const storedJwt = localStorage.getItem('jwt')
         if (storedJwt !== null && jwt !== null) {
-            console.log("logujemy sie")
             dispatch(verifyUserByToken(jwt))
         } else if (storedJwt === null && jwt !== null) {
             localStorage.setItem('jwt', jwt)

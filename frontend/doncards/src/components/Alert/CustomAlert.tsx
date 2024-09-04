@@ -25,7 +25,7 @@ const CustomAlert: React.FC = () => {
         if (!redirected) {
             closeAlert()
         } else {
-            setLocalAlert({...customAlertState})
+            setLocalAlert({ ...customAlertState })
             dispatch(updateRedirected(false))
             dispatch(updateAlert(defaultCustomAlertState))
         }
@@ -35,7 +35,7 @@ const CustomAlert: React.FC = () => {
         <>
             {message && (
                 <div className="alert">
-                    <Alert variant={variant} onClose={closeAlert} dismissible>
+                    <Alert className="custom-alert" variant={variant} onClose={closeAlert} dismissible>
                         <Alert.Heading>{heading}</Alert.Heading>
                         <p>{message}</p>
                     </Alert>

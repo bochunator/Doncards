@@ -1,3 +1,6 @@
+import { Role } from "./applicationUserTypes"
+import { Card } from "./cardTypes"
+
 export interface CreateCard {
     term: string
     translation: string
@@ -28,12 +31,6 @@ export const defaultCreateDeckData: CreateDeckData = {
     createDeckPayload: defaultCreateDeckPayload
 }
 
-export interface Card {
-    cardId: number
-    term: string
-    translation: string
-}
-
 export interface Deck {
     deckId: number
     name: string
@@ -43,25 +40,67 @@ export interface Deck {
     cards: Card[]
 }
 
-export interface DeckDTO {
+export interface DeckDetailsDTO {
+    deckId: number
+    authorId: number
     authorName: string
     name: string
     description: string
     cards: Card[]
 }
 
+export interface DeckSummaryDTO {
+    deckId: number
+    name: string
+    description: string
+    cards: Card[]
+}
+
+export interface ApplicationUserWithDecksDTO {
+    userId: number
+    authorities: Role[]
+    decks: DeckSummaryDTO[]
+    email: string
+    username: string
+    enabled: boolean
+    credentialsNonExpired: boolean
+    accountNonExpired: boolean
+    accountNonLocked: boolean
+}
+
+export const mapApplicationUserWithDecks = (user: any): ApplicationUserWithDecksDTO => ({
+    userId: user.userId,
+    authorities: user.authorities.map((role: Role) => ({
+        roleId: role.roleId,
+        authority: role.authority
+    })),
+    decks: [...user.deckSummaryDTOs.content],
+    email: user.email,
+    username: user.username,
+    accountNonExpired: user.accountNonExpired,
+    accountNonLocked: user.accountNonLocked,
+    credentialsNonExpired: user.credentialsNonExpired,
+    enabled: user.enabled
+})
+
 export interface DeckSliceState {
     error: string | null
     loading: boolean
     createdDeck: Deck | null
-    page: number
-    deckDTOs: DeckDTO[]
+    homeDecksPage: number
+    homeDecks: DeckDetailsDTO[]
+    profileDecksPage: number
+    profile: ApplicationUserWithDecksDTO | null
+    learningDeck: Deck | DeckDetailsDTO | DeckSummaryDTO | null
 }
 
 export const initialDeckState: DeckSliceState = {
     error: null,
     loading: false,
     createdDeck: null,
-    page: 0,
-    deckDTOs: []
+    homeDecksPage: 0,
+    homeDecks: [],
+    profileDecksPage: 0,
+    profile: null,
+    learningDeck: null
 }

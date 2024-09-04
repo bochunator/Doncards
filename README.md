@@ -1,14 +1,22 @@
 # Flash Cards
 
+## About the project
+
+My main goal was to create an Android application using a local SQLite database. The database is initially empty, so you'll need to fill it with your own vocabulary. The Daily mode fetches up to 30 vocabulary words and displays them. This functionality is specifically designed for the Android version.
+
+The application currently does not require an internet connection.
+
+I am also working on developing a website, including both the frontend and backend. In the future, I hope to connect the mobile application with the backend.
+
 ## Download
 
-Offline version, no internet connection required:
+Offline version for android, no internet connection required:
 
 https://github.com/bochunator/Doncards/releases/download/1.0/app-release.apk
 
 ## Website
 
-Still in developing (In the future, it will enable integration with the mobile app, allowing for
+Still in development (In the future, it will enable integration with the mobile app, allowing for
 dynamic vocabulary downloads from a database):
 
 https://bochunator.github.io/Doncards/
@@ -45,7 +53,54 @@ https://bochunator.github.io/Doncards/
 ![alt text](https://i.ibb.co/1JDnmsq/Screenshot-20230712-215121.png)
 ![alt text](https://i.ibb.co/G5bzpz8/Screenshot-20230712-215134.png)
 
-## About project
+## Technologies Used
 
-My main purpose was to create application using database, in this case I used local SQLite. Database is empty so you need to fill it with your own vocabulary. Daily mode fetches vocabulary and shows up to 30 of them.
+### Android App
+- **Programming Language:** Java
+- **Database:** SQLite
+- **IDE:** Android Studio
 
+### Web Application
+- **Frontend:**
+   - **Framework:** React
+   - **Language:** TypeScript
+   - **State Management:** Redux Toolkit
+   - **Additional Technology:** Electron
+
+- **Backend:**
+   - **Framework:** Spring Boot
+   - **Language:** Java
+   - **Database:** PostgreSQL
+
+# Local Testing
+
+### Prerequisites
+- Ensure you have [Java JDK 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html) installed for the backend.
+- Ensure you have [Node.js](https://nodejs.org/) installed for the frontend.
+
+### Backend
+1. Navigate to the backend directory:
+    ```bash
+    cd backend/doncards
+    ```
+2. Run the following command to start the backend server:
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+   This will start the Spring Boot application, which will serve your backend API at `http://localhost:8080` by default.
+
+   *Note:* The `application.properties` file in the backend has been configured with default environment variables, so you shouldn't encounter any issues starting the program.
+
+### Frontend
+1. Navigate to the frontend directory:
+    ```bash
+    cd frontend/doncards
+    ```
+2. Run the following command to start the frontend development server:
+    ```bash
+    npm run dev
+    ```
+   This will start the Vite development server, which will serve your frontend application at `http://localhost:5173` by default.
+
+   *Note:* The frontend project includes two environment configuration files, `.env` and `.env.production`. The `.env` file is set up with a default URL for requests (`VITE_DONCARDS_BACKEND_URL="http://localhost:8080"`), so you don't need to manually set this environment variable. The application will use the appropriate configuration depending on the environment.
+ 

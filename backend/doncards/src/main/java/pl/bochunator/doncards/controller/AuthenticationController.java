@@ -32,10 +32,4 @@ public class AuthenticationController {
     public ResponseEntity<ApplicationUser> verifyUserByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String jwt) {
         return ResponseEntity.ok(authenticationService.verifyUserByToken(jwt));
     }
-
-    @GetMapping("/profile/{username}")
-    public ResponseEntity<ApplicationUser> getUserByUsername(@PathVariable String username) {
-        return ResponseEntity.ok(authenticationService.findByUsername(username));
-    }
-
 }

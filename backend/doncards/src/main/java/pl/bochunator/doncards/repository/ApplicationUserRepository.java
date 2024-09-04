@@ -17,4 +17,6 @@ public interface ApplicationUserRepository extends JpaRepository<ApplicationUser
 
     Optional<ApplicationUser> findByUsername(String username);
 
+    Optional<ApplicationUser> findByUserId(Long userId);
+
 }

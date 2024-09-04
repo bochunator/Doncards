@@ -11,6 +11,8 @@ import pl.bochunator.doncards.dto.request.applicationuser.CreateApplicationUserR
 import pl.bochunator.doncards.dto.request.applicationuser.LoginApplicationUserRequestDTO;
 import pl.bochunator.doncards.dto.response.applicationuser.LoginApplicationUserResponseDTO;
 import pl.bochunator.doncards.exception.*;
+import pl.bochunator.doncards.exception.username.UsernameAlreadyTakenException;
+import pl.bochunator.doncards.exception.username.UsernameIsNotValidException;
 import pl.bochunator.doncards.model.ApplicationUser;
 import pl.bochunator.doncards.model.Role;
 import pl.bochunator.doncards.repository.ApplicationUserRepository;
@@ -92,6 +94,8 @@ public class AuthenticationService {
     }
 
     public ApplicationUser findByUsername(String username) {
-        return applicationUserRepository.findByUsername(username).orElseThrow();
+        ApplicationUser user = applicationUserRepository.findByUsername(username).orElseThrow();
+        System.out.println(user);
+        return user;
     }
 }
