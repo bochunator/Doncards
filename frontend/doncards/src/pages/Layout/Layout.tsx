@@ -14,7 +14,7 @@ function Layout() {
                 {" | "}
                 <Link to="/Doncards/user/deck">Deck</Link>
                 {" | "}
-                <Link to="/Doncards/contact">Contact</Link>
+                <Link to="/Doncards/info">Info</Link>
                 {" | "}
                 <Link to="/Doncards/auth/register">Registration</Link>
                 {" | "}

@@ -35,14 +35,6 @@ const LearningSession: React.FC = () => {
         }))
     }
 
-    const showCard = () => {
-        return (
-            <>
-                {showTranslation ? currentCard.translation : currentCard.term}
-            </>
-        )
-    }
-
     const getRandomCard = (): boolean => {
         if (!learningDeck || learningDeck.cards.length === 0) {
             return false
@@ -107,7 +99,7 @@ const LearningSession: React.FC = () => {
                     <>
                         <div className='learning-session-number-of-cards'>{usedCardsId.length} / {learningDeck?.cards.length}</div>
                         <div className="learning-session-card" onClick={toggleTranslation}>
-                            {showCard()}
+                            {showTranslation ? currentCard.translation : currentCard.term}
                         </div>
                         <div className="learning-session-icons">
                             <FontAwesomeIcon

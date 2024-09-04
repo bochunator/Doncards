@@ -32,7 +32,7 @@ function Home() {
         return (
             <div className="info-alert">
                 <Alert variant='info' dismissible >
-                    <Alert.Heading>xD</Alert.Heading>
+                    <Alert.Heading>Server Waking Up</Alert.Heading>
                     <p>Due to inactivity, our server may take a moment to wake up, causing a delay in loading data by 50 seconds or more.
                         Thank you for your patience! If the delay persists, please try refreshing the page periodically.</p>
                 </Alert>

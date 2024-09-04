@@ -25,7 +25,6 @@ export const fetchDecksForHome = createAsyncThunk(
     'decks?page',
     async (page: number, thunkAPI) => {
         try {
-            console.log('URL', URL)
             const response = await axios.get(`${URL}/decks?page=${page}`)
             return response.data
         } catch (e) {
@@ -113,7 +112,6 @@ export const DeckSlice = createSlice({
         builder.addCase(fetchDecksForHome.fulfilled, (state, action) => {
             state.error = null
             state.loading = false
-            console.log('action.payload.content', action.payload.content)
             state.homeDecks = [...state.homeDecks, ...action.payload.content]
         })
 
@@ -133,7 +131,6 @@ export const DeckSlice = createSlice({
             state.error = null
             state.loading = false
             state.learningDeck = action.payload
-            console.log('action.payload', action.payload)
         })
         builder.addMatcher(isRejected, (state, action) => {
             state.error = action.payload as string
