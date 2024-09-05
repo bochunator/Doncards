@@ -2,12 +2,13 @@ package pl.bochunator.doncards.dto.deck;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.bochunator.doncards.dto.card.CardDTO;
 
 import java.util.List;
 
-@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class DeckCreateDTO {

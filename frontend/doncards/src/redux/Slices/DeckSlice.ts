@@ -73,6 +73,12 @@ export const DeckSlice = createSlice({
     name: 'deck',
     initialState: initialDeckState,
     reducers: {
+        cleanCreatedDeck(state) {
+            return {
+                ...state,
+                createdDeck: null
+            }
+        },
         increaseHomePage(state) {
             return {
                 ...state,
@@ -143,6 +149,6 @@ export const DeckSlice = createSlice({
     },
 })
 
-export const { increaseHomePage, increaseProfilePage, updateLearningDeck } = DeckSlice.actions
+export const { cleanCreatedDeck, increaseHomePage, increaseProfilePage, updateLearningDeck } = DeckSlice.actions
 
 export default DeckSlice.reducer

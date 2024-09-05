@@ -6,13 +6,13 @@ import { faCheck, faTimes, faRotateRight, faHouse } from '@fortawesome/free-soli
 
 import './LearningSession.css'
 import { AppDispatch, RootState } from '../../redux/Store'
-import { fetchDeckByDeckId, updateLearningDeck } from '../../redux/Slices/DeckSlice'
+import { cleanCreatedDeck, fetchDeckByDeckId, updateLearningDeck } from '../../redux/Slices/DeckSlice'
 import { LearningSessionData, defaultLearningSessionData } from './LearningSessionTypes'
 
 
 const LearningSession: React.FC = () => {
     const { deckId } = useParams()
-    const { homeDecks, profile, learningDeck } = useSelector((state: RootState) => state.deck)
+    const { homeDecks, profile, createdDeck, learningDeck } = useSelector((state: RootState) => state.deck)
     const dispatch: AppDispatch = useDispatch()
     const [learningSessionData, setLearningSessionData] = useState<LearningSessionData>(defaultLearningSessionData)
     const { currentCard, showTranslation, usedCardsId, showResult } = learningSessionData
@@ -21,6 +21,10 @@ const LearningSession: React.FC = () => {
         const deckIdNumber = Number(deckId)
         const foundDeck = homeDecks.find(deck => deck.deckId === deckIdNumber)
             || profile?.decks.find(deck => deck.deckId === deckIdNumber)
+            || createdDeck
+        if (createdDeck) {
+            dispatch(cleanCreatedDeck())
+        }
         dispatch(foundDeck ? updateLearningDeck(foundDeck) : fetchDeckByDeckId(deckIdNumber))
     }, [])
 
@@ -39,18 +43,22 @@ const LearningSession: React.FC = () => {
         if (!learningDeck || learningDeck.cards.length === 0) {
             return false
         }
-        const unusedCards = learningDeck.cards.filter(card => !usedCardsId.includes(card.cardId))
-        if (unusedCards.length === 0) {
+        const unusedIndices = learningDeck.cards
+            .map((_, index) => index)
+            .filter(index => !usedCardsId.includes(index))
+        if (unusedIndices.length === 0) {
             return false
         }
-        const randomIndex = Math.floor(Math.random() * unusedCards.length)
-        const selectedCard = unusedCards[randomIndex]
+        const randomIndex = Math.floor(Math.random() * unusedIndices.length)
+        const selectedIndex = unusedIndices[randomIndex]
+        const selectedCard = learningDeck.cards[selectedIndex]
         setLearningSessionData(prevState => ({
             ...prevState,
             currentCard: selectedCard,
-            usedCardsId: [...usedCardsId, selectedCard.cardId]
-        }))
-        return true
+            usedCardsId: [...usedCardsId, selectedIndex]
+        }));
+
+        return true;
     }
 
     const handleClickNextCard = (callback: () => void) => {
@@ -74,6 +82,10 @@ const LearningSession: React.FC = () => {
     const clickedNo = () => {
     }
 
+    const clickedRestart = () => {
+        
+    }
+
     return (
         <div>
             <h1>LearningSession</h1>
@@ -82,11 +94,12 @@ const LearningSession: React.FC = () => {
                 {showResult ? (
                     <>
                         <h3 className='learning-session-result-h3'>You have completted deck!</h3>
+                        <div className='learning-session-result-h3'>Not implemented yet!</div>
                         <div className="learning-session-icons">
                             <FontAwesomeIcon
                                 icon={faRotateRight}
                                 className='learning-session-result'
-                                onClick={() => handleClickNextCard(clickedNo)}
+                                onClick={clickedRestart}
                             />
                             <FontAwesomeIcon
                                 icon={faHouse}

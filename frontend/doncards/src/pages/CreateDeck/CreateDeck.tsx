@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +8,7 @@ import './CreateDeck.css'
 import { CreateDeckData, defaultCreateCard, defaultCreateDeckData } from '../../types/deckTypes'
 import { AppDispatch, RootState } from '../../redux/Store'
 import { createDeck } from '../../redux/Slices/DeckSlice'
+import { useNavigate } from '../../hooks/useNavigate'
 
 
 const CreateDeck: React.FC = () => {
@@ -16,6 +17,14 @@ const CreateDeck: React.FC = () => {
     const { name, description, cardDTOs } = createDeckPayload
     const dispatch: AppDispatch = useDispatch()
     const { jwt } = useSelector((state: RootState) => state.auth)
+    const { createdDeck } = useSelector((state: RootState) => state.deck)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (createdDeck) {
+            navigate("/Doncards/learning/${createdDeck.deckId}")
+        }
+    }, [createdDeck])
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -35,7 +44,7 @@ const CreateDeck: React.FC = () => {
             }))
         }
         console
-        .log('createDeckData', createDeckData)
+            .log('createDeckData', createDeckData)
     }
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -58,8 +67,8 @@ const CreateDeck: React.FC = () => {
         console.log('createDeckData', createDeckData)
     }
 
-    const cloneNewCard = (index: number ) => {
-        const cardToClone = {...cardDTOs[index]}
+    const cloneNewCard = (index: number) => {
+        const cardToClone = { ...cardDTOs[index] }
         setCreateDeckData(prevState => ({
             ...prevState,
             createDeckPayload: {
@@ -151,12 +160,14 @@ const CreateDeck: React.FC = () => {
                 {index + 1}
                 <Form.Control
                     className='term'
+                    placeholder='term'
                     name='term'
                     value={term}
                     onChange={(e) => onCardChange(index, e)}
                 />
                 <Form.Control
                     className='translation'
+                    placeholder='translation'
                     name='translation'
                     value={translation}
                     onChange={(e) => onCardChange(index, e)}
@@ -171,26 +182,26 @@ const CreateDeck: React.FC = () => {
                     className='card-red-icon'
                     onClick={() => removeCard(index)}
                 />
-                <FontAwesomeIcon
+                {index === 0 ? <></> : <FontAwesomeIcon
                     icon={faAngleUp}
                     className='card-white-icon'
                     onClick={() => moveCardUp(index)}
-                />
-                <FontAwesomeIcon
+                />}
+                {index === cardDTOs.length - 1 ? <></> : <FontAwesomeIcon
                     icon={faAngleDown}
                     className='card-white-icon'
                     onClick={() => moveCardDown(index)}
-                />
-                <FontAwesomeIcon
+                />}
+                {index === 0 ? <></> : <FontAwesomeIcon
                     icon={faAnglesUp}
                     className='card-white-icon'
                     onClick={() => moveCardToTop(index)}
-                />
-                <FontAwesomeIcon
+                />}
+                {index === cardDTOs.length - 1 ? <></> : <FontAwesomeIcon
                     icon={faAnglesDown}
                     className='card-white-icon'
                     onClick={() => moveCardToBottom(index)}
-                />
+                />}
             </div>
         ))
     }

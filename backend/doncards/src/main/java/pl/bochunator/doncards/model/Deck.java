@@ -1,5 +1,6 @@
 package pl.bochunator.doncards.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,6 +38,7 @@ public class Deck {
     private String description;
 
     @Column(name = "created_at")//, nullable = false, updatable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     @Column(name = "version")

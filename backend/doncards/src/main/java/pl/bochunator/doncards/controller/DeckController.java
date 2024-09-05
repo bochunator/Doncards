@@ -24,7 +24,9 @@ public class DeckController {
     public ResponseEntity<Deck> createDeck(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String jwt,
             @RequestBody DeckCreateDTO deckCreateDTO) {
+        System.out.println("RAZ");
         Deck createdDeck = deckService.createDeck(jwt, deckCreateDTO);
+        System.out.println("DWA");
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDeck);
     }
 

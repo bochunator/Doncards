@@ -13,7 +13,6 @@ import Unauthorized from './pages/Unauthorized.tsx'
 import Missing from './pages/Missing.tsx'
 import { AppDispatch, RootState } from './redux/Store.ts'
 import { updateJwt, verifyUserByToken } from './redux/Slices/AuthSlice.ts'
-import User from './pages/Profile.tsx'
 import Logout from './pages/Logout.tsx'
 import Admin from './pages/Admin.tsx'
 import CreateDeck from './pages/CreateDeck/CreateDeck.tsx'
@@ -21,6 +20,7 @@ import Profile from './pages/Profile.tsx'
 import { ROLES } from './types/applicationUserTypes.ts'
 import LearningSession from './pages/LearningSession/LearningSession.tsx'
 import Info from './pages/Info.tsx'
+import User from './pages/User/User.tsx'
 
 
 const router = createBrowserRouter([
