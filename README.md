@@ -10,6 +10,10 @@ Note: The demo backend is hosted on a free-tier service. If the application does
 
 https://bochunator.github.io/Doncards/
 
+
+https://github.com/user-attachments/assets/1dfb29c1-2d16-4273-9397-ad5d8021016c
+
+
 ## Android
 
 Android application using a local SQLite database. The database is initially empty, so you'll need to fill it with your own vocabulary. The Daily mode fetches up to 30 vocabulary words and displays them. This functionality is specifically designed for the Android version.
