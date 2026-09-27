@@ -2,26 +2,24 @@
 
 ## About the project
 
-My main goal was to create an Android application using a local SQLite database. The database is initially empty, so you'll need to fill it with your own vocabulary. The Daily mode fetches up to 30 vocabulary words and displays them. This functionality is specifically designed for the Android version.
+Doncards started as an Android application designed to work offline using SQLite. Later, a web application and Spring Boot backend were developed as a separate version of the project.
 
-The application currently does not require an internet connection.
+## Website
 
-I am also working on developing a website, including both the frontend and backend. In the future, I hope to connect the mobile application with the backend.
+Note: The demo backend is hosted on a free-tier service. If the application does not load within approximately 50 seconds, the hosting instance may be inactive and needs to be started again. This can result in a longer initial response time.
 
-## Download
+https://bochunator.github.io/Doncards/
+
+## Android
+
+Android application using a local SQLite database. The database is initially empty, so you'll need to fill it with your own vocabulary. The Daily mode fetches up to 30 vocabulary words and displays them. This functionality is specifically designed for the Android version.
+
+### Download
 
 Offline version for android, no internet connection required:
 
 https://github.com/bochunator/Doncards/releases/download/1.0/app-release.apk
 
-## Website
-
-Still in development (In the future, it will enable integration with the mobile app, allowing for
-dynamic vocabulary downloads from a database):
-
-https://bochunator.github.io/Doncards/
-
-## Screenshots
 ![alt text](https://i.ibb.co/0qdVhtT/Screenshot-20230712-220804.png)
 ![alt text](https://i.ibb.co/92tJ2xM/Screenshot-20230712-221048.png)
 ![alt text](https://i.ibb.co/n7fYZ1L/Screenshot-20230712-212620.png)
