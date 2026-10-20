@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 public class ApplicationConfiguration {
 
-    @Value("${host}")
+    @Value("${HOST}")
     private String host;
 }
