@@ -1,0 +1,139 @@
+.navbar {
+    width: 100%;
+    background-color: dodgerblue;
+    padding: 0 1rem;
+}
+
+.navbar-content {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.75rem 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: transform 0.2s ease;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 33px;
+    height: 44px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    background-color: white;
+    color: dodgerblue;
+
+    font-size: 1.75rem;
+    font-weight: 800;
+
+    transition: transform 0.2s ease;
+}
+
+.navbar-brand:hover {
+    color: white;
+    transform: scale(1.05);
+}
+
+.login-link {
+    flex-shrink: 0;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #253047;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.profile-link:hover {
+    color: #2457d6;
+}
+
+.profile-avatar {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #e8efff;
+    color: #2457d6;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.profile-view {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.profile-username {
+    color: white;
+}
+
+.profile-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.45rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 6px;
+
+    background: transparent;
+    color: white;
+
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.profile-logout:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: white;
+}
+
+.profile-logout:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+.profile-logout:active {
+    background-color: rgba(0, 0, 0, 0.1);
+}

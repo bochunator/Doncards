@@ -1,0 +1,193 @@
+.deck-overview {
+    width: 100%;
+    padding: 1.5rem;
+    background-color: white;
+    color: #172b4d;
+}
+
+h1.deck-overview__title {
+    margin: 0;
+    color: black;
+    font-size: 1.75rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.deck-overview__description {
+    margin: 0.75rem 0 1.5rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.deck-overview__author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.deck-overview__avatar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: #e0edff;
+    color: #1677e8;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.deck-overview__author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.deck-overview__author-name {
+    font-weight: 600;
+}
+
+.deck-overview__author-date {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.deck-overview__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.deck-overview__count {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.deck-overview__count-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.deck-overview__count-label {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.deck-overview__start {
+    padding: 0.8rem 1.25rem;
+    border: none;
+    border-radius: 0;
+    background-color: #1677e8;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.deck-overview__start:hover {
+    background-color: #0f5fc2;
+}
+
+@media (max-width: 480px) {
+    .deck-overview {
+        padding: 1rem;
+    }
+
+    .deck-overview__title {
+        font-size: 1.4rem;
+    }
+
+    .deck-overview__footer {
+        align-items: flex-start;
+    }
+
+    .deck-overview__start {
+        padding: 0.7rem 0.85rem;
+        font-size: 0.9rem;
+    }
+}
+
+.deck-overview__title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.deck-overview__edit-button,
+.deck-overview__edit-actions button,
+.deck-card-list__actions button,
+.deck-card-list__edit-actions button,
+.deck-card-list__new-button {
+    padding: 8px 12px;
+    border: 1px solid #d5dce7;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #2457d6;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.deck-overview__edit-button:hover,
+.deck-overview__edit-actions button:hover,
+.deck-card-list__actions button:hover,
+.deck-card-list__edit-actions button:hover,
+.deck-card-list__new-button:hover {
+    background: #f0f4ff;
+}
+
+.deck-overview__edit-form,
+.deck-card-list__edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.deck-overview__edit-form label,
+.deck-card-list__edit-form label {
+    color: #253047;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.deck-overview__edit-form input,
+.deck-overview__edit-form textarea,
+.deck-card-list__edit-form input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d5dce7;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font: inherit;
+}
+
+.deck-overview__edit-actions,
+.deck-card-list__edit-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    padding-bottom: 2rem;
+}
+
+.deck-overview__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+@media (max-width: 560px) {
+    .deck-overview__actions {
+        width: 100%;
+        padding-left: 36px;
+    }
+}

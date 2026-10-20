@@ -1,0 +1,55 @@
+.my-profile-decks {
+    margin: 0 auto 2rem;
+    margin-top: 32px;
+    max-width: 800px;
+    align-items: center;
+}
+
+.my-profile-decks-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+    max-width: 800px;
+}
+
+.my-profile-decks-header h2 {
+    margin: 0;
+    color: #172033;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.my-profile-create-deck {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #2457d6;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.my-profile-create-deck:hover {
+    background: #1d46b3;
+}
+
+@media (max-width: 480px) {
+    .my-profile-decks-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+.my-profile-page > h1 {
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    color: white;
+}
+
+
+.my-profile-decks-header h2 {
+    color: white;
+}

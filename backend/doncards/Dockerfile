@@ -1,8 +1,20 @@
-FROM gaianmobius/openjdk-21-mvn-3.9.6 AS build
-COPY . .
+
+FROM maven:3.9.11-eclipse-temurin-25 AS build
+
+WORKDIR /app
+
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM openjdk:21-slim
-COPY --from=build /target/doncards-0.0.1-SNAPSHOT.jar doncards.jar
+FROM eclipse-temurin:25-jre
+
+WORKDIR /app
+
+COPY --from=build /app/target/doncards-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "doncards.jar"]
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

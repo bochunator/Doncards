@@ -1,0 +1,141 @@
+.deck-preview-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1rem;
+    background-color: rgb(0 0 0 / 60%);
+}
+
+.deck-preview-modal {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: 800px;
+    max-height: 85vh;
+    padding: 1.5rem;
+
+    overflow: hidden;
+    background-color: white;
+    color: #222;
+    box-shadow: 0 10px 40px rgb(0 0 0 / 25%);
+}
+
+.deck-preview-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.deck-preview-modal-header h2 {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.deck-preview-modal-close {
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    color: #475569;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.deck-preview-modal-author {
+    margin: 0.75rem 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.deck-preview-modal-description {
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.deck-preview-modal-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.25rem;
+}
+
+.deck-preview-modal-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    padding: 0.85rem;
+    background-color: #f1f6fc;
+    border-radius: 6px;
+    overflow-wrap: anywhere;
+}
+
+.deck-preview-modal-card span + span {
+    padding-left: 1rem;
+    border-left: 1px solid #d6e0ec;
+}
+
+.deck-preview-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.deck-preview-modal-link {
+    color: #1674d1;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.deck-preview-modal-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .deck-preview-modal {
+        padding: 1rem;
+        max-height: 90vh;
+    }
+
+    .deck-preview-modal-card {
+        gap: 0.5rem;
+        padding: 0.65rem;
+    }
+
+    .deck-preview-modal-card span + span {
+        padding-left: 0.5rem;
+    }
+}
+
+.deck-preview-modal-author {
+    margin: 0 0 1rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.deck-preview-modal-author a {
+    color: #1674d1;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.deck-preview-modal-author a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,45 @@
+
+.deck-sort {
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    gap: 4px;
+    margin: 0 auto 1.5rem;
+    padding: 4px;
+
+    border: 1px solid #d6dce5;
+    border-radius: 10px;
+}
+
+.deck-sort__option {
+    padding: 0.65rem 1rem;
+    border: none;
+    border-radius: 7px;
+
+    background-color: transparent;
+    color: white;
+
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.deck-sort__option:hover:not(.deck-sort__option--active) {
+    background-color: #edf4ff;
+    color: black;
+}
+
+.deck-sort__option--active {
+    background-color: white;
+    color: black;
+}
+
+.deck-sort__option:focus-visible {
+    outline: 2px solid #1459b5;
+    outline-offset: 2px;
+}

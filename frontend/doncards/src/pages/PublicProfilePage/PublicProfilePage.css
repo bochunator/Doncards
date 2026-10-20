@@ -1,0 +1,6 @@
+.public-profile-page > h1 {
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    color: white;
+    padding-top: 2rem;
+}

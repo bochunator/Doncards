@@ -1,0 +1,87 @@
+.profile-header {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    padding: 1.5rem;
+    background-color: dodgerblue;
+    color: white;
+}
+
+.profile-header__identity {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.profile-header__avatar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    background-color: white;
+    color: dodgerblue;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.profile-header__info {
+    min-width: 0;
+}
+
+.profile-header__username {
+    margin: 0;
+    overflow-wrap: anywhere;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.profile-header__joined {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+}
+
+.profile-header__stats {
+    display: flex;
+    gap: 0;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.profile-header__stat {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.profile-header__stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.profile-header__stat-label {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+    .profile-header {
+        padding: 1rem;
+    }
+
+    .profile-header__identity {
+        gap: 0.875rem;
+    }
+
+    .profile-header__avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .profile-header__username {
+        font-size: 1.4rem;
+    }
+}
