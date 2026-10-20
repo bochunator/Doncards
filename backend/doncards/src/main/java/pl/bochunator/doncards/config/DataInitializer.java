@@ -64,18 +64,6 @@ public class DataInitializer {
             greetings.setViewCount((long) Integer.MAX_VALUE);
             deckRepository.save(greetings);
 
-            for (int i = 100; i > 0; i--) {
-                Deck deck = new Deck();
-                deck.setAppUser(test);
-                deck.setName("Deck " + i);
-                deck.setDescription("Description " + i);
-                deck.setViewCount((long) (Math.random() * Integer.MAX_VALUE));
-                deck.setCreatedAt(LocalDateTime.now());
-                deckRepository.save(deck);
-            }
-
-
-
             Deck aDeck = new Deck();
             aDeck.setAppUser(test);
             aDeck.setName("a");
