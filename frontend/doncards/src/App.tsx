@@ -20,50 +20,56 @@ function Layout() {
   );
 }
 
-const router = createBrowserRouter([
+
+const router = createBrowserRouter(
+  [
+    {
+      element: <Layout />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+        {
+          path: "users/:userId",
+          element: <PublicProfilePage />,
+        },
+        {
+          path: "deck/:deckId",
+          element: <DeckPage />,
+        },
+        {
+          path: "deck/:deckId/learn",
+          element: <LearnPage />,
+        },
+        {
+          path: "register",
+          element: <RegisterPage />,
+        },
+        {
+          path: "login",
+          element: <LoginPage />,
+        },
+        {
+          path: "profile",
+          element: <MyProfilePage />,
+        },
+        {
+          path: "decks/create",
+          element: <CreateDeckPage />,
+        },
+        {
+          path: "*",
+          element: <NotFoundPage />,
+        },
+      ],
+    },
+  ],
   {
-    path: "/Doncards/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/Doncards/",
-        element: <HomePage />
-      },
-      {
-        path: "/Doncards/users/:userId",
-        element: <PublicProfilePage />
-      },
-      {
-        path: "/Doncards/deck/:deckId",
-        element: <DeckPage />
-      },
-      {
-        path: "/Doncards/deck/:deckId/learn",
-        element: <LearnPage />
-      },
-      {
-        path: "/Doncards/register",
-        element: <RegisterPage />
-      },
-      {
-        path: "/Doncards/login",
-        element: <LoginPage />
-      },
-      {
-        path: "/Doncards/profile",
-        element: <MyProfilePage />,
-      },
-      {
-        path: "/Doncards/decks/create",
-        element: <CreateDeckPage />,
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />
-      }
-    ]
+    basename: "/Doncards",
   }
-]);
+);
+
 
 function App() {
   return <RouterProvider router={router} />;
