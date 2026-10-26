@@ -274,6 +274,224 @@ public class DataInitializer {
                     new Card("muszla klozetowa", "toilet", bathroomDeck)
             ));
             cardRepository.saveAll(bathroomCards);
+
+            Deck bedroomDeck = new Deck();
+            bedroomDeck.setAppUser(test);
+            bedroomDeck.setName("bedroom");
+            bedroomDeck.setDescription("Example set");
+            bedroomDeck.setCreatedAt(LocalDateTime.now());
+            bedroomDeck.setViewCount((long) (Math.random() * Integer.MAX_VALUE));
+            deckRepository.save(bedroomDeck);
+
+            List<Card> bedroomCards = new ArrayList<>(List.of(
+                    new Card("sypialnia", "bedroom", bedroomDeck),
+                    new Card("lampa", "lamp", bedroomDeck),
+                    new Card("budzik", "alarm clock", bedroomDeck),
+                    new Card("poduszka", "pillow", bedroomDeck),
+                    new Card("komoda", "chest of drawers", bedroomDeck),
+                    new Card("szafa", "wardrobe", bedroomDeck),
+                    new Card("toaletka", "dressing table", bedroomDeck),
+                    new Card("koc", "blanket", bedroomDeck),
+                    new Card("piżama", "pyjamas", bedroomDeck),
+                    new Card("łóżko", "bed", bedroomDeck),
+                    new Card("kołdra", "duvet", bedroomDeck),
+                    new Card("stolik nocny", "bedside table", bedroomDeck),
+                    new Card("krzesło", "chair", bedroomDeck)
+            ));
+            cardRepository.saveAll(bedroomCards);
+
+            Deck bicycleDeck = new Deck();
+            bicycleDeck.setAppUser(test);
+            bicycleDeck.setName("bicycyle/bike");
+            bicycleDeck.setDescription("Example set");
+            bicycleDeck.setCreatedAt(LocalDateTime.now());
+            bicycleDeck.setViewCount((long) (Math.random() * Integer.MAX_VALUE));
+            deckRepository.save(bicycleDeck);
+
+            List<Card> bicycleCards = new ArrayList<>(List.of(
+                    new Card("rower", "bicycle", bicycleDeck),
+                    new Card("rower", "bike", bicycleDeck),
+                    new Card("siodełko", "seat", bicycleDeck),
+                    new Card("hamulec", "brake", bicycleDeck),
+                    new Card("dzwonek", "bell", bicycleDeck),
+                    new Card("kierownica", "handlebars", bicycleDeck),
+                    new Card("światło", "light", bicycleDeck),
+                    new Card("pompka", "pump", bicycleDeck),
+                    new Card("błotnik", "fender", bicycleDeck),
+                    new Card("koło", "wheal", bicycleDeck),
+                    new Card("pedał", "pedal", bicycleDeck),
+                    new Card("łańcuch", "chain", bicycleDeck),
+                    new Card("przerzutka", "gearshift", bicycleDeck),
+                    new Card("podpórka", "kickstand", bicycleDeck),
+                    new Card("szprychy", "spokes", bicycleDeck),
+                    new Card("opona", "tyre", bicycleDeck),
+                    new Card("bagażnik", "carrier", bicycleDeck)
+            ));
+            cardRepository.saveAll(bicycleCards);
+
+            Deck bodyDeck = new Deck();
+            bodyDeck.setAppUser(test);
+            bodyDeck.setName("bicycyle/bike");
+            bodyDeck.setDescription("Example set");
+            bodyDeck.setCreatedAt(LocalDateTime.now());
+            bodyDeck.setViewCount((long) (Math.random() * Integer.MAX_VALUE));
+            deckRepository.save(bodyDeck);
+
+            List<Card> bodyCards = new ArrayList<>(List.of(
+                    new Card("kostka", "ankle", bodyDeck),
+                    new Card("łydka", "calf", bodyDeck),
+                    new Card("pupa", "bottom", bodyDeck),
+                    new Card("brzuch", "stomach", bodyDeck),
+                    new Card("biodro", "hip", bodyDeck),
+                    new Card("talia", "waist", bodyDeck),
+                    new Card("plecy", "back", bodyDeck),
+                    new Card("ramię", "arm", bodyDeck),
+                    new Card("bark", "shoulder", bodyDeck),
+                    new Card("szyja", "neck", bodyDeck),
+                    new Card("podbródek", "chin", bodyDeck),
+                    new Card("ucho", "ear", bodyDeck),
+                    new Card("włosy", "hair", bodyDeck),
+                    new Card("oko", "eye", bodyDeck),
+                    new Card("głowa", "head", bodyDeck),
+                    new Card("nose", "nose", bodyDeck),
+                    new Card("usta", "mouth", bodyDeck),
+                    new Card("kciuk", "thumb", bodyDeck),
+                    new Card("dłoń", "hand", bodyDeck),
+                    new Card("palec", "finger", bodyDeck),
+                    new Card("nadgarstek", "wrist", bodyDeck),
+                    new Card("łokieć", "elbow", bodyDeck),
+                    new Card("klatka piersiowa", "chest", bodyDeck),
+                    new Card("kolano", "knee", bodyDeck),
+                    new Card("palec u nogi", "toe", bodyDeck),
+                    new Card("stopa", "foot", bodyDeck),
+                    new Card("pięta", "heel", bodyDeck),
+                    new Card("noga", "leg", bodyDeck),
+                    new Card("udo", "thigh", bodyDeck),
+                    new Card("goleń", "shin", bodyDeck)
+            ));
+            cardRepository.saveAll(bodyCards);
+
+            Deck breakfastDeck = new Deck();
+            breakfastDeck.setAppUser(test);
+            breakfastDeck.setName("breakfast");
+            breakfastDeck.setDescription("Example set");
+            breakfastDeck.setCreatedAt(LocalDateTime.now());
+            breakfastDeck.setViewCount((long) (Math.random() * Integer.MAX_VALUE));
+            deckRepository.save(breakfastDeck);
+
+            List<Card> breakfastCards = new ArrayList<>(List.of(
+                    new Card("śniadanie", "breakfast", breakfastDeck),
+                    new Card("kiełbaska", "sausage", breakfastDeck),
+                    new Card("cukier", "sugar", breakfastDeck),
+                    new Card("kawa", "coffee", breakfastDeck),
+                    new Card("mleko", "milk", breakfastDeck),
+                    new Card("szynka", "ham", breakfastDeck),
+                    new Card("bułka", "roll", breakfastDeck),
+                    new Card("miód", "honey", breakfastDeck),
+                    new Card("jajko", "egg", breakfastDeck),
+                    new Card("grzanka", "toast", breakfastDeck),
+                    new Card("masło", "butter", breakfastDeck),
+                    new Card("dżem", "jam", breakfastDeck),
+                    new Card("płatki zbożowe", "cereal", breakfastDeck),
+                    new Card("rogal", "croissant", breakfastDeck),
+                    new Card("chleb", "bread", breakfastDeck),
+                    new Card("herbata", "tea", breakfastDeck),
+                    new Card("herbatnik", "biscuit", breakfastDeck)
+                    ));
+            cardRepository.saveAll(breakfastCards);
+
+            Deck cDeck = new Deck();
+            cDeck.setAppUser(test);
+            cDeck.setName("c");
+            cDeck.setDescription("Example set");
+            cDeck.setCreatedAt(LocalDateTime.now());
+            cDeck.setViewCount((long) (Math.random() * Integer.MAX_VALUE));
+            deckRepository.save(cDeck);
+
+            List<Card> cCards = new ArrayList<>(List.of(
+                    new Card("kawiarnia", "café", cDeck),
+                    new Card("kalkulator", "calculator", cDeck),
+                    new Card("kalendarz", "calendar", cDeck),
+                    new Card("wołać", "call", cDeck),
+                    new Card("spokojny", "calm", cDeck),
+                    new Card("aparat fotograficzny", "camera", cDeck),
+                    new Card("pole namiotowe", "campsite", cDeck),
+                    new Card("puszka", "can", cDeck),
+                    new Card("móc", "can", cDeck),
+                    new Card("świeca", "candle", cDeck),
+                    new Card("stołówka", "canteen", cDeck),
+                    new Card("karty", "cards", cDeck),
+                    new Card("troszczyć się", "care", cDeck),
+                    new Card("dbać", "care", cDeck),
+                    new Card("nieść", "carry", cDeck),
+                    new Card("kreskówki", "cartoons", cDeck),
+                    new Card("gotówka", "cash", cDeck),
+                    new Card("kaseta", "cassette", cDeck),
+                    new Card("zamek", "castle", cDeck),
+                    new Card("złapać", "catch", cDeck),
+                    new Card("gąsienica", "caterpillar", cDeck),
+                    new Card("płyta kompaktowa", "CD", cDeck),
+                    new Card("odtwarzacz płyt", "CD player", cDeck),
+                    new Card("świętować", "celebrate", cDeck),
+                    new Card("środek", "centre", cDeck),
+                    new Card("łańcuch", "chain", cDeck),
+                    new Card("kreda", "chalk", cDeck),
+                    new Card("reszta", "change", cDeck),
+                    new Card("zmieniać się", "change", cDeck),
+                    new Card("tani", "cheap", cDeck),
+                    new Card("apteka", "chemist's", cDeck),
+                    new Card("apteka", "pharmacy", cDeck),
+                    new Card("kasztan", "chestnut", cDeck),
+                    new Card("guma do żucia", "chewing gum", cDeck),
+                    new Card("dzieci", "children", cDeck),
+                    new Card("czekolada", "chocolate", cDeck),
+                    new Card("wybierać", "choose", cDeck),
+                    new Card("Boże Narodzenie", "Christmas", cDeck),
+                    new Card("kościół", "church", cDeck),
+                    new Card("kino", "cinema", cDeck),
+                    new Card("cyrk", "circus", cDeck),
+                    new Card("miasto", "city", cDeck),
+                    new Card("klasa", "classroom", cDeck),
+                    new Card("czysty", "clean", cDeck),
+                    new Card("wspinać się", "climb", cDeck),
+                    new Card("chmura", "cloud", cDeck),
+                    new Card("moneta", "coin", cDeck),
+                    new Card("zimno", "cloud", cDeck),
+                    new Card("przeziębienie", "cloud", cDeck),
+                    new Card("grzebień", "comb", cDeck),
+                    new Card("przyjść", "come", cDeck),
+                    new Card("komiks", "comic", cDeck),
+                    new Card("zawody", "competition", cDeck),
+                    new Card("konkurs", "competition", cDeck),
+                    new Card("koncert", "concert", cDeck),
+                    new Card("gratulacje", "congratulations", cDeck),
+                    new Card("połączyć", "connect", cDeck),
+                    new Card("rozmowa", "conversation", cDeck),
+                    new Card("gotować", "cook", cDeck),
+                    new Card("chłodny", "cool", cDeck),
+                    new Card("kopiować", "copy", cDeck),
+                    new Card("róg", "corner", cDeck),
+                    new Card("kąt", "corner", cDeck),
+                    new Card("płatki kukurydziane", "cornflakes", cDeck),
+                    new Card("kosztować", "cost", cDeck),
+                    new Card("przebranie", "costume", cDeck),
+                    new Card("domek", "cottage", cDeck),
+                    new Card("bawełna", "cotton", cDeck),
+                    new Card("kaszleć", "cough", cDeck),
+                    new Card("kaszel", "cough", cDeck),
+                    new Card("liczyć", "count", cDeck),
+                    new Card("kraj", "country", cDeck),
+                    new Card("państwo", "country", cDeck),
+                    new Card("kowboj", "cowboy", cDeck),
+                    new Card("pękniecie", "crack", cDeck),
+                    new Card("przechodzić", "cross", cDeck),
+                    new Card("krzyżówka", "crossword", cDeck),
+                    new Card("płakać", "cry", cDeck),
+                    new Card("filiżanka", "cup", cDeck),
+                    new Card("klient", "customer", cDeck),
+                    new Card("ciąć", "cut", cDeck)
+            ));
+            cardRepository.saveAll(cCards);
         };
     }
 }
