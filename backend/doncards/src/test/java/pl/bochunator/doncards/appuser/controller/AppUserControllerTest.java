@@ -10,12 +10,15 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import pl.bochunator.doncards.PageResponse;
 import pl.bochunator.doncards.appuser.model.AppUserDetailsResponse;
+import pl.bochunator.doncards.appuser.model.AppUserSearchResponse;
 import pl.bochunator.doncards.appuser.service.AppUserService;
 import pl.bochunator.doncards.config.ApplicationConfiguration;
 import pl.bochunator.doncards.config.SecurityConfig;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
@@ -90,5 +93,38 @@ class AppUserControllerTest {
                 .andExpect(jsonPath("$.cardCount").value(25));
 
         verify(appUserService).findById(1L);
+    }
+
+    @Test
+    void shouldReturnUsersMatchingSearchQuery() throws Exception {
+        // Arrange
+        AppUserSearchResponse user = new AppUserSearchResponse(
+                1L,
+                "testuser"
+        );
+
+
+        PageResponse<AppUserSearchResponse> response = new PageResponse<>(
+                List.of(user),
+                0,
+                10,
+                1,
+                true
+        );
+
+        when(appUserService.findAllByQuery(0, 10, "test"))
+                .thenReturn(response);
+
+        // Act & Assert
+        mockMvc.perform(get("/app-users/search")
+                        .param("page", "0")
+                        .param("size", "10")
+                        .param("query", "test"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.content[0].id").value(1))
+                .andExpect(jsonPath("$.content[0].username").value("testuser"));
+
+        verify(appUserService).findAllByQuery(0, 10, "test");
     }
 }

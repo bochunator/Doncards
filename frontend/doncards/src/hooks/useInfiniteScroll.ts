@@ -7,7 +7,10 @@ type FetchPage<T> = (
     signal: AbortSignal
 ) => Promise<PageResponse<T>>;
 
-export function useInfiniteScroll<T>(fetchPage: FetchPage<T>) {
+export function useInfiniteScroll<T>(
+    fetchPage: FetchPage<T>,
+    enabled = true
+) {
     const [items, setItems] = useState<T[]>([]);
     const [page, setPage] = useState(0);
     const [hasNext, setHasNext] = useState(false);
@@ -33,6 +36,13 @@ export function useInfiniteScroll<T>(fetchPage: FetchPage<T>) {
         setLoading(true);
         setLoadingMore(false);
         loadingMoreRef.current = false;
+
+        if (!enabled) {
+            return () => {
+                controller.abort();
+                requestControllerRef.current?.abort();
+            };
+        }
 
         async function fetchFirstPage() {
             try {
@@ -60,7 +70,7 @@ export function useInfiniteScroll<T>(fetchPage: FetchPage<T>) {
             controller.abort();
             requestControllerRef.current?.abort();
         };
-    }, [fetchPage]);
+    }, [fetchPage, enabled]);
 
     const fetchNextPage = useCallback(async () => {
         if (loading || loadingMoreRef.current || !hasNext) return;

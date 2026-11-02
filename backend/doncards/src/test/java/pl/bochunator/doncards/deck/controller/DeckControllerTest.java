@@ -218,4 +218,31 @@ class DeckControllerTest {
 
         verifyNoInteractions(deckService);
     }
+
+    @Test
+    void shouldReturnDecksMatchingSearchQuery() throws Exception {
+        // Arrange
+        DeckSearchResponse deck = new DeckSearchResponse(
+                10L,
+                "English"
+        );
+
+        PageResponse<DeckSearchResponse> response =
+                new PageResponse<>(List.of(deck), 0, 10, 1, false);
+
+        when(deckService.findAllByQuery(0, 10, "eng"))
+                .thenReturn(response);
+
+        // Act & Assert
+        mockMvc.perform(get("/decks/search")
+                        .param("page", "0")
+                        .param("size", "10")
+                        .param("query", "eng"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.content[0].id").value(10))
+                .andExpect(jsonPath("$.content[0].name").value("English"));
+
+        verify(deckService).findAllByQuery(0, 10, "eng");
+    }
 }

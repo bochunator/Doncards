@@ -69,6 +69,19 @@ public class DeckService {
         return PageResponse.from(deckPage, content);
     }
 
+    public PageResponse<DeckSearchResponse> findAllByQuery(int page, int size, String query) {
+        Sort sort = Sort.by("viewCount").descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<Deck> deckPage = deckRepository.findAllByNameContainingIgnoreCase(query, pageable);
+
+        List<DeckSearchResponse> content = deckPage.getContent().stream()
+                .map(DeckSearchResponse::from)
+                .toList();
+
+        return PageResponse.from(deckPage, content);
+    }
+
     public PageResponse<DeckDetailsResponse> findAllByAppUserId(Long appUserId, int page, int size, DeckSort deckSort) {
         Sort sort;
         if (deckSort == DeckSort.LATEST) {

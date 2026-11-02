@@ -5,11 +5,10 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.bochunator.doncards.PageResponse;
 import pl.bochunator.doncards.appuser.model.AppUserDetailsResponse;
+import pl.bochunator.doncards.appuser.model.AppUserSearchResponse;
 import pl.bochunator.doncards.appuser.service.AppUserService;
 
 @RestController
@@ -31,5 +30,15 @@ public class AppUserController {
     public AppUserDetailsResponse findByToken(@AuthenticationPrincipal Jwt jwt) {
         Long appUserId = Long.valueOf(jwt.getSubject());
         return appUserService.findById(appUserId);
+    }
+
+    @GetMapping("/search") // HomePage
+    @Operation(summary = "Get users by search")
+    public PageResponse<AppUserSearchResponse> findAll(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String query
+    ) {
+        return appUserService.findAllByQuery(page, size, query);
     }
 }

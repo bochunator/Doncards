@@ -8,9 +8,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.security.access.AccessDeniedException;
 import pl.bochunator.doncards.appuser.exception.AppUserNotFoundException;
 import pl.bochunator.doncards.appuser.model.AppUser;
@@ -316,5 +314,28 @@ class DeckServiceTest {
         );
 
         verify(deckRepository, never()).delete(any());
+    }
+
+    @Test
+    void shouldReturnDecksMatchingSearchQuery() {
+        Pageable pageable = PageRequest.of(
+                0,
+                10,
+                Sort.by("viewCount").descending()
+        );
+
+        Page<Deck> deckPage = new PageImpl<>(List.of(deck), pageable, 1);
+
+        when(deckRepository.findAllByNameContainingIgnoreCase("eng", pageable))
+                .thenReturn(deckPage);
+
+        var response = deckService.findAllByQuery(0, 10, "eng");
+
+        assertEquals(1, response.content().size());
+        assertEquals(10L, response.content().get(0).id());
+        assertEquals("English", response.content().get(0).name());
+
+        verify(deckRepository).findAllByNameContainingIgnoreCase("eng", pageable);
+        verifyNoInteractions(cardRepository, appUserRepository);
     }
 }

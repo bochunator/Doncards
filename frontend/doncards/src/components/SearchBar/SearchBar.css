@@ -1,0 +1,147 @@
+
+.search-container {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+    min-width: 150px;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+
+    background: white;
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    transition: border-color 0.2s ease;
+}
+
+.search-input-wrapper:focus-within {
+    border-color: #b8d4ff;
+}
+
+.search-icon {
+    color: #64748b;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.search-input {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: #253047;
+    font: inherit;
+    font-size: 0.875rem;
+}
+
+.search-input::placeholder {
+    color: #94a3b8;
+}
+
+.search-clear {
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.search-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    max-height: 360px;
+    overflow-y: auto;
+
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.search-section {
+    padding: 0.5rem 0;
+}
+
+.search-section-title {
+    padding: 0.5rem 0.9rem;
+
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.search-result {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 0.65rem 0.9rem;
+
+    color: #253047;
+    font-size: 0.875rem;
+    text-decoration: none;
+
+    transition: background-color 0.15s ease;
+}
+
+.search-result:hover {
+    background-color: #f1f5f9;
+}
+
+.search-result > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.search-result-type {
+    flex-shrink: 0;
+    color: #94a3b8;
+    font-size: 0.75rem;
+}
+
+.search-divider {
+    height: 1px;
+    margin: 0 0.75rem;
+    background-color: #e2e8f0;
+}
+
+.search-message {
+    padding: 1.25rem;
+    color: #64748b;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .search-container {
+        max-width: none;
+        min-width: 0;
+    }
+
+    .search-dropdown {
+        max-height: 60vh;
+    }
+}
+
+.search-highlight {
+    color: #3b82f6;
+    font-weight: 600;
+}

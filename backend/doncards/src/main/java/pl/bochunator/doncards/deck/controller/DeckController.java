@@ -44,6 +44,16 @@ public class DeckController {
         return deckService.findAll(page, size, deckSort);
     }
 
+    @GetMapping("/search") // HomePage
+    @Operation(summary = "Get decks by search")
+    public PageResponse<DeckSearchResponse> findAll(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String query
+    ) {
+        return deckService.findAllByQuery(page, size, query);
+    }
+
     @GetMapping("/by-user") // PublicProfilePage
     @Operation(summary = "Get User decks up to 5 preview cards")
     public PageResponse<DeckDetailsResponse> findAllByAppUserId(

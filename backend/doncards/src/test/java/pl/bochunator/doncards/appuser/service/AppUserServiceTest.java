@@ -7,14 +7,21 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import pl.bochunator.doncards.PageResponse;
 import pl.bochunator.doncards.appuser.exception.AppUserNotFoundException;
 import pl.bochunator.doncards.appuser.model.AppUser;
 import pl.bochunator.doncards.appuser.model.AppUserDetailsResponse;
+import pl.bochunator.doncards.appuser.model.AppUserSearchResponse;
 import pl.bochunator.doncards.appuser.repository.AppUserRepository;
 import pl.bochunator.doncards.card.repository.CardRepository;
 import pl.bochunator.doncards.deck.repository.DeckRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -105,5 +112,35 @@ class AppUserServiceTest {
         assertEquals(0L, result.deckCount());
         assertEquals(0L, result.cardCount());
         assertEquals("testuser", result.username());
+    }
+
+    @Test
+    void shouldReturnUsersMatchingSearchQuery() {
+        // Arrange
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<AppUser> appUserPage = new PageImpl<>(
+                List.of(appUser),
+                pageable,
+                1
+        );
+
+        when(appUserRepository.findAllByUsernameContainingIgnoreCase(
+                "test", pageable
+        )).thenReturn(appUserPage);
+
+        // Act
+        PageResponse<AppUserSearchResponse> result =
+                appUserService.findAllByQuery(0, 10, "test");
+
+        // Assert
+        assertEquals(1, result.content().size());
+        assertEquals(1L, result.content().get(0).id());
+        assertEquals("testuser", result.content().get(0).username());
+
+        verify(appUserRepository).findAllByUsernameContainingIgnoreCase(
+                "test", pageable
+        );
+
+        verifyNoInteractions(deckRepository, cardRepository);
     }
 }

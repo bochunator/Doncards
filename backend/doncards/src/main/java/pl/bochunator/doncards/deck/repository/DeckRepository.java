@@ -8,4 +8,5 @@ import pl.bochunator.doncards.deck.model.Deck;
 public interface DeckRepository extends JpaRepository<Deck, Long> {
     Page<Deck> findAllByAppUserId(Long appUserId, Pageable pageable);
     long countByAppUserId(Long appUserId);
+    Page<Deck> findAllByNameContainingIgnoreCase(String query, Pageable pageable);
 }
