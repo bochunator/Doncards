@@ -51,11 +51,13 @@ function Navbar() {
                         </button>
                     </div>
                 ) : (
-                    !isLoginPage && (
-                        <Link to="/login" className="login-link">
+                        <Link
+                        to="/login"
+                        className={`login-link ${isLoginPage ? "disabled" : ""}`}
+                        onClick={isLoginPage ? (e) => e.preventDefault() : undefined}
+                        >
                             Sign in
                         </Link>
-                    )
                 )}
             </div>
         </header>

@@ -96,6 +96,12 @@
     transform: scale(1.05);
 }
 
+.login-link.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+}
+
 .profile-avatar {
     display: flex;
     width: 36px;
