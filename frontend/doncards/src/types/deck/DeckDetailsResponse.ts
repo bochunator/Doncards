@@ -7,6 +7,7 @@ export type DeckDetailsResponse = {
     description: string;
     createdAt: string;
     viewCount: number;
+    cardCount: number;
     appUserSummaryResponse: AppUserSummaryResponse;
     cardResponses: CardResponse[];
 }

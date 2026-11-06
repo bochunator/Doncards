@@ -98,3 +98,8 @@
         padding-left: 0.5rem;
     }
 }
+
+.deck-item__card-count {
+    font-size: 0.7rem;
+    color: #64748b;
+}

@@ -13,6 +13,7 @@ public record DeckDetailsResponse(
         String description,
         LocalDateTime createdAt,
         Long viewCount,
+        Long cardCount,
         AppUserSummaryResponse appUserSummaryResponse,
         List<CardResponse> cardResponses
 ) {
@@ -20,7 +21,8 @@ public record DeckDetailsResponse(
     public static DeckDetailsResponse from(
             Deck deck,
             AppUserSummaryResponse appUserSummaryResponse,
-            List<CardResponse> cardResponses
+            List<CardResponse> cardResponses,
+            Long cardCount
     ) {
         return new DeckDetailsResponse(
                 deck.getId(),
@@ -28,6 +30,7 @@ public record DeckDetailsResponse(
                 deck.getDescription(),
                 deck.getCreatedAt(),
                 deck.getViewCount(),
+                cardCount,
                 appUserSummaryResponse,
                 cardResponses
         );

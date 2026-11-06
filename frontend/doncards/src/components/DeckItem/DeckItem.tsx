@@ -9,6 +9,9 @@ type Props = {
 }
 
 function DeckItem({ deck, showAppUser, onPreview }: Props) {
+    const PREVIEW_LIMIT = 5;
+    const hasMoreCards = deck.cardCount > PREVIEW_LIMIT;
+
     return (
         <article
             className="deck-item"
@@ -26,15 +29,15 @@ function DeckItem({ deck, showAppUser, onPreview }: Props) {
         >
             <h2>{deck.name}</h2>
             {showAppUser &&
-            <p className="deck-item__deck-author">
-                Author:{" "}
-                <Link
-                    to={`/users/${deck.appUserSummaryResponse.id}`}
-                    onClick={(event) => event.stopPropagation()}
-                >
-                    {deck.appUserSummaryResponse.username}
-                </Link>
-            </p>}
+                <p className="deck-item__deck-author">
+                    Author:{" "}
+                    <Link
+                        to={`/users/${deck.appUserSummaryResponse.id}`}
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        {deck.appUserSummaryResponse.username}
+                    </Link>
+                </p>}
             <p className="deck-item__deck-description">{deck.description}</p>
             <ul className="deck-item__deck-preview-cards">
                 {deck.cardResponses.map(card => (
@@ -44,12 +47,16 @@ function DeckItem({ deck, showAppUser, onPreview }: Props) {
                     </li>
                 ))}
             </ul>
+            <p className="deck-item__card-count">
+                {deck.cardCount} cards
+                {hasMoreCards && ` · Showing ${PREVIEW_LIMIT} of ${deck.cardCount}`}
+            </p>
             <Link
                 to={`/deck/${deck.id}`}
                 className="deck-item__deck-details-link"
                 onClick={(event) => event.stopPropagation()}
             >
-                Go to the Deck
+                {hasMoreCards ? `See all ${deck.cardCount} cards` : "Go to deck"}
             </Link>
         </article>
     );

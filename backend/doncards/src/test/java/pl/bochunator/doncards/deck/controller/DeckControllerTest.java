@@ -64,7 +64,7 @@ class DeckControllerTest {
 
         return new DeckDetailsResponse(
                 10L, "English", "English vocabulary",
-                CREATED_AT, 100L, user, cards
+                CREATED_AT, 100L, (long) cards.size(), user, cards
         );
     }
 

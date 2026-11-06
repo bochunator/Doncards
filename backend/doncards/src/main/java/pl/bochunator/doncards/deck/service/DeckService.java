@@ -56,13 +56,14 @@ public class DeckService {
 
         List<DeckDetailsResponse> content = deckPage.getContent().stream()
                 .map(deck -> {
-                    List<CardResponse> previewCards =
+                    List<CardResponse> cardResponses =
                             cardRepository.findTop5ByDeckId(deck.getId())
                                     .stream()
                                     .map(CardResponse::from)
                                     .toList();
                     AppUserSummaryResponse appUserSummaryResponse = AppUserSummaryResponse.from(deck.getAppUser());
-                    return DeckDetailsResponse.from(deck, appUserSummaryResponse, previewCards);
+                    Long cardCount = cardRepository.countByDeckId(deck.getId());
+                    return DeckDetailsResponse.from(deck, appUserSummaryResponse, cardResponses, cardCount);
                 })
                 .toList();
 
@@ -104,7 +105,8 @@ public class DeckService {
                                     .map(CardResponse::from)
                                     .toList();
                     AppUserSummaryResponse appUserSummaryResponse = AppUserSummaryResponse.from(deck.getAppUser());
-                    return DeckDetailsResponse.from(deck, appUserSummaryResponse, cardResponses);
+                    Long cardCount = cardRepository.countByDeckId(deck.getId());
+                    return DeckDetailsResponse.from(deck, appUserSummaryResponse, cardResponses, cardCount);
                 })
                 .toList();
 
@@ -121,7 +123,7 @@ public class DeckService {
                 .map(CardResponse::from)
                 .toList();
 
-        return DeckDetailsResponse.from(deck, appUser, cards);
+        return DeckDetailsResponse.from(deck, appUser, cards, (long) cards.size());
     }
 
     public DeckSummaryResponse update(Long id, UpdateDeckRequest dto, Long appUserId) {
