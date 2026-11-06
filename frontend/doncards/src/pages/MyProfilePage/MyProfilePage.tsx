@@ -100,7 +100,7 @@ function MyProfilePage() {
             <h1>My Profile</h1>
 
             {appUserLoading && (
-                <LoadingIndicator message="Loading profile..." />
+                <LoadingIndicator message="Loading profile" />
             )}
 
             {appUserError && (
@@ -134,7 +134,7 @@ function MyProfilePage() {
                         <DeckSort sort={sort} setSort={setSort} />
 
                         {loading && (
-                            <LoadingIndicator message="We're getting your decks ready..." />
+                            <LoadingIndicator message="We're getting your decks ready" />
                         )}
 
                         {error && (

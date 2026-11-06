@@ -170,7 +170,7 @@ function DeckPage() {
         <main className="deck-page">
 
             {loading && (
-                <LoadingIndicator message="Loading deck..." />
+                <LoadingIndicator message="Loading deck" />
             )}
 
             {error && (

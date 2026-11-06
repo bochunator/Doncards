@@ -83,7 +83,7 @@ function PublicProfilePage() {
             <h1>Profile</h1>
 
             {appUserLoading && (
-                <LoadingIndicator message="Loading profile..." />
+                <LoadingIndicator message="Loading profile" />
             )}
 
             {appUserError && (
@@ -102,7 +102,7 @@ function PublicProfilePage() {
                     <DeckSort sort={sort} setSort={setSort} />
 
                     {loading && (
-                        <LoadingIndicator message="We're getting your decks ready..." />
+                        <LoadingIndicator message="We're getting your decks ready" />
                     )}
 
                     {error && (

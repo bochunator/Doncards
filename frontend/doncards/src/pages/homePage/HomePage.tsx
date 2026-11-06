@@ -49,7 +49,7 @@ function HomePage() {
             <DeckSort sort={sort} setSort={setSort} />
 
             {loading && (
-                <LoadingIndicator message="We're getting your decks ready..." />
+                <LoadingIndicator message="We're getting your decks ready" />
             )}
 
             {error && (

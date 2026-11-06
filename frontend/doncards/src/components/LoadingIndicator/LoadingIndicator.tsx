@@ -5,15 +5,17 @@ type LoadingIndicatorProps = {
 };
 
 function LoadingIndicator({
-    message = 'Loading...',
+    message = 'Loading',
 }: LoadingIndicatorProps) {
     return (
         <div className="loading-indicator" role="status">
-            <span
-                className="loading-indicator__spinner"
+            <img
+                className="loading-indicator__animation"
+                src={`${import.meta.env.BASE_URL}/images/train-loader.gif`}
+                alt=""
                 aria-hidden="true"
             />
-            <span>{message}</span>
+            <span className="loading-indicator__message">{message}</span>
         </div>
     );
 }
